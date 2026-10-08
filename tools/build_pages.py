@@ -39,6 +39,15 @@ def private_preview(s):
         s = re.sub(r'(<meta name="viewport"[^>]*>)', r'\1\n' + NOINDEX, s, count=1)
     return s
 
+import hashlib
+def _ver(name):
+    try: return hashlib.sha1(open(os.path.join(ROOT, "assets", name), "rb").read()).hexdigest()[:8]
+    except OSError: return ""
+
+def bust(s):
+    """Version-stamp CSS/JS links so browsers pick up changes right after a deploy."""
+    return re.sub(r'((?:href|src)="(?:\.\./)?assets/)([\w.-]+\.(?:css|js))"', lambda m: f'{m.group(1)}{m.group(2)}?v={_ver(m.group(2))}"', s)
+
 def rewrite_paths(s):
     s = re.sub(r'((?:href|src)=")(assets|img)/', r'\1../\2/', s)
     return s.replace("url(img/", "url(../img/")
@@ -66,14 +75,14 @@ for f in sorted(os.listdir(site_dir)):
     p = os.path.join(site_dir, f); s = open(p).read()
     s = rewrite_paths(s)
     s = inject_bar(s, concept_bar("../", "site"))
-    open(p, "w").write(private_preview(s))
+    open(p, "w").write(bust(private_preview(s)))
 
 # ---- brand book: content-only page -> full document
 bp = os.path.join(ROOT, "brand-book", "index.html")
 s = rewrite_paths(open(bp).read())
 s = s.replace('href="../site/" target="_blank" rel="noopener"', 'href="../site/"')
 s = inject_bar(s, concept_bar("../", "book"))
-open(bp, "w").write(private_preview(shell(s, "Oshare Brand Book", "")))
+open(bp, "w").write(bust(private_preview(shell(s, "Oshare Brand Book", ""))))
 
 # ---- hub
 FILES = [
@@ -149,5 +158,5 @@ hub = f"""<!doctype html>
 </body>
 </html>
 """
-open(os.path.join(ROOT, "index.html"), "w").write(private_preview(hub))
+open(os.path.join(ROOT, "index.html"), "w").write(bust(private_preview(hub)))
 print("built: index.html, brand-book/index.html, site/*.html")
