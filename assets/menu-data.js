@@ -1,0 +1,181 @@
+/* Oshare Sushi + Bar — menu data
+ * Source: Toast Online Ordering (toast.app/r/osharesushibar/order) and osharesushi.com/menu,
+ * captured 2026-10-08. Prices and availability change: Toast is the source of truth.
+ * In production this file is generated from the Toast menus API (or WP admin) — never hand-edited.
+ * "*" = served raw or undercooked (Toast's own marking). oos = out of stock at capture time.
+ */
+window.OSHARE_ORDER = "https://toast.app/r/osharesushibar/order";
+window.OSHARE_IMG = (id) => "https://d1w7312wesee68.cloudfront.net/" + id + "/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/";
+window.OSHARE_PHOTOS = {
+  edamame:   "https://d1w7312wesee68.cloudfront.net/TTqN8b8ou9jftjgmWeFXfnfWHXd-AFTMH_I75PmBQnk/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/e203da23-91ea-4e16-94a8-0a644a82d430.jpg",
+  bao:       "https://d1w7312wesee68.cloudfront.net/LO0GOMEG7whPu_EYJ4GMIEnOG9Vcs1d3vQNZZLvwqPg/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/af706958-3983-4b6c-b879-f0b08f7458ab.jpg",
+  karaage:   "https://d1w7312wesee68.cloudfront.net/u3FVnzoT8o3rT-K0XfpFVd6SYailYau2H09pPv1T98I/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/69559957-00d0-4cea-a472-99736a759a54.jpg",
+  spicyChicken: "https://d1w7312wesee68.cloudfront.net/8q2gjHrXz_0gBDsj6EZ0_dkmWHtv6c40T0eKzY2NaFk/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/30d0fe5c-a10a-48f8-97b5-03ba388f16b2.jpg",
+  katsu:     "https://d1w7312wesee68.cloudfront.net/fwSMsOfdFbgPd8GKbYGt49uoHDW9jFJ2FvGHVMoFvM0/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/05e3ce1d-ea1c-485f-b31f-bdfe749c538a.jpg",
+  beefTeri:  "https://d1w7312wesee68.cloudfront.net/8e-QX-bQd-dZcfqcFD-quv8_oKkTnckxKRPgsBQYDWg/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/64033a89-a639-49a5-9c64-fbeed44b9c41.jpg",
+  salmon:    "https://d1w7312wesee68.cloudfront.net/A48_eUuc8zEpx-QfRFLnAblTG8j7aZ7xNpR7fbN0K-c/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/6df4a724-391b-4c1b-b507-0e87d96e35ff.jpg",
+  santaka:   "https://d1w7312wesee68.cloudfront.net/dDm3Wqy7tSehakvIXpN8kukp7_9FtZI4wOSFwEIs210/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/03925df8-2e06-452c-b9fe-2c58eaa9cc34.jpg",
+  stirfry:   "https://d1w7312wesee68.cloudfront.net/zfJCQsVBa7TGoTObnfdL-La4wBaTwTGPW9SV9urpLcI/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/90a0a02d-2813-47c8-b696-eeddbe738839.jpg",
+  crispyRice:"https://d1w7312wesee68.cloudfront.net/yS5tjxgDnNIFYgpRs2g9_n4mhn4KPbiSH8fqmvxU5JQ/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/dd42bc96-5a66-481f-aef3-a243015af427.jpg",
+  crabSalad: "https://d1w7312wesee68.cloudfront.net/Lt9RfdhtjxdJxupwHwEtXyGlYSSnwgXR2wjjb6P9ytE/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/351147ad-7b65-46cd-af72-8f97cb536a6a.jpg",
+  beefTataki:"https://d1w7312wesee68.cloudfront.net/u6xDuGHBxdKetnh9BhpfJnG78BHsvEcAGNjW0iSIK7o/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/27532b0f-9f1c-446f-815e-477c91734ee0.jpg",
+  nigiri:    "https://d1w7312wesee68.cloudfront.net/bAEU98POrBCvbBFnae7odpzHUAoeBIZzSLskJNBXNYA/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/72142779-9202-4807-bc3f-64bd410e8268.jpg",
+  firebender:"https://d1w7312wesee68.cloudfront.net/8x-9W3QgEQn9yjYQoP34-aFRewe4Ivbp2CMCRpMLIW8/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/aef0aa2f-0981-4931-a550-34869a13574d.jpg",
+  lobster:   "https://d1w7312wesee68.cloudfront.net/c117Lum3csdCveZAPfIVQntPw7zDu4eFBWuUslT_ptE/resize:fit:720:720/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/6321bb88-504e-40dd-b603-0374d99d1544.jpg",
+  /* site photos (Toast Sites CDN) */
+  spread:    "https://d1w7312wesee68.cloudfront.net/uT-3fezXwup6MHe7-ElYls418qMMeqr7SxjjgbVcL8w/ext:webp/quality:85/preset:large/plain/s3://toast-sites-resources-prod/restaurantImages/d52bafb8-40b7-464a-8c4c-269877e33bca/OshareSushiBar_hero_2880x2304.jpg",
+  tray:      "https://d1w7312wesee68.cloudfront.net/pfI4u34sa-0w6n_R212voqDLwAkxHZK6xSXASv8Alc4/ext:webp/quality:85/preset:large/plain/s3://toast-sites-resources-prod/restaurantImages/d52bafb8-40b7-464a-8c4c-269877e33bca/OshareSushiBar_MiginDeluxe_2880x2304.jpg",
+  udon:      "https://d1w7312wesee68.cloudfront.net/9aTM7imFMVNse_WqNl1WUmWRKhhY35_7D5yPDEWRaNI/ext:webp/quality:85/plain/s3://toasttab/menu_service/restaurants/caa2d549-d96e-4af8-a3d9-7fd495fccc18/MenuItem/90a0a02d-2813-47c8-b696-eeddbe738839.jpg",
+  darkSpread:"https://d1w7312wesee68.cloudfront.net/hnObNczYxeJ2JqqthJMtMAc2enf2VAHfmTvuhXsGoVw/ext:webp/quality:85/preset:large/plain/s3://toast-sites-resources-prod/restaurantImages/d52bafb8-40b7-464a-8c4c-269877e33bca/OshareSushiBar4.png",
+  logo:      "https://d1w7312wesee68.cloudfront.net/W_apLuvTCRp7YhZ5HNQWYmiP4MkPZfEtz3vbIrWbLFI/ext:webp/quality:85/preset:xxl/plain/s3://toast-sites-resources-prod/restaurantImages/d52bafb8-40b7-464a-8c4c-269877e33bca/Logotransparency.png"
+};
+
+/* fields: n name · d description (verbatim from Toast, typos lightly fixed) · p price · raw · spicy (0–2, only where the menu says spicy) · oos · id (Toast item slug) · img (key in OSHARE_PHOTOS) */
+window.OSHARE_MENU = [
+ { key:"signature", title:"Signature Maki", jp:"Specialty", note:"Sushi rice, soy paper, sesame. Cut into 8 pieces unless noted.", items:[
+  {n:"Passion Roll", d:"Lobster mix, avocado, mango, cucumber, topped with tuna, seaweed salad, fried shallots, eel sauce, dragon fruit aioli", p:18, raw:true, id:"item-passion-roll_65b14c8b-b472-4c07-a18c-78a3a70533d6", feat:true},
+  {n:"Lobster Rangoon Maki", d:"Lobster tail tempura, avocado, whipped cream cheese, plum sauce, spicy mayo, fried onions, crispy wontons", p:19, id:"item-lobster-rangoon-maki_08fd6ef1-e0b3-4896-8920-0f499bb9b5dc", img:"lobster", feat:true},
+  {n:"Firebender Maki", d:"Spicy tuna mix, salmon, apple, avocado, sweet potato tempura, whipped cream cheese, tempura crunch, ghost pepper sate, spicy mayo", p:17, raw:true, spicy:2, id:"item-firebender-maki_1d96c5db-8b62-47e7-8c83-397c6780c539", img:"firebender", feat:true},
+  {n:"The Acre", d:"Shrimp tempura, lobster mix, avocado, mango, shrimp, plum sauce, sriracha, fried shallots", p:18, id:"item-the-acre_c94f43a1-fe87-477f-869d-c4db75ac37f8", feat:true},
+  {n:"Bulgogi Maki", d:"Spicy bulgogi beef, avocado, cucumber, sweet potato tempura, kabayaki sauce", p:14, raw:true, spicy:1, id:"item-bulgogi-maki_fa9cbb15-1a22-419b-8471-158451d580c6", feat:true},
+  {n:"Red Sox Maki", d:"Shrimp tempura, spicy tuna, crab stick, avocado, cucumber, green apple, honey aioli, kabayaki sauce", p:13, raw:true, id:"item-red-sox-maki_63b848cc-34f7-4784-8ffb-a70eaa7c7e0d"},
+  {n:"Celtic Roll Maki", d:"Smoked salmon, crab stick, shrimp tempura, apple, avocado, cream cheese, kewpie mayo, salmon, teriyaki sauce, fried shallots", p:16, raw:true, id:"item-celtic-roll-maki_f3cc9637-228b-4584-ad0a-6318dd70982f"},
+  {n:"Samurai Maki", d:"Beef tenderloin, lobster mix, apple, avocado, sweet potato tempura, kabayaki sauce, sriracha, fried shallots, scallions", p:21, raw:true, id:"item-samurai-maki_f3573581-50b6-459d-8d6b-c76a4bab7179"},
+  {n:"Divine", d:"Salmon, tuna, crab mix, shrimp tempura, avocado, rolled in a cucumber wrap, topped with eel sauce and spicy mayo", p:20, id:"item-divine_cc4efe25-857c-449b-921e-41a7a20e56b2"},
+  {n:"Rad Roll", d:"Lobster mix, tuna, salmon, shrimp tempura, avocado, apple, rolled in a radish wrap, topped with ponzu", p:16, id:"item-rad-roll_d40f9003-be33-4956-8796-266835b0d399"},
+  {n:"Fire Roll", d:"Tiger Eye maki topped with Volcano — baked scallop, salmon, kanikama mix — scallion and eel sauce", p:18, id:"item-fire-roll_fbae0905-4253-4079-85be-726420f02ea0"},
+  {n:"Okinawa Sunshine Maki", d:"Shrimp tempura, spicy tuna mix, tuna, avocado, mango, mango sauce, tempura crunch, spicy mayo", p:15, raw:true, id:"item-okinawa-sunshine-maki_bbb75400-a75b-46ff-afca-b9ce9ea9c34c"},
+  {n:"Volcano Maki", d:"California in a nori wrap, topped with baked scallop, salmon, kanikama mix, spicy mayo, kabayaki sauce, scallions. 6 pieces", p:15, id:"item-volcano-maki_4dd30cdd-8729-4bd7-8b01-64d38841607e"},
+  {n:"Oshare Maki", d:"Salmon, tuna, whitefish, crab stick, asparagus, kabayaki sauce, honey aioli, fried shallots, lightly tempura fried", p:14, raw:true, id:"item-oshare-maki_7b86843a-7319-4e01-a18e-ef1fb5ea1ec4"},
+  {n:"Aloha Maki", d:"Shrimp tempura, spicy tuna, avocado, pineapple, topped with crab stick, honey aioli, kabayaki sauce", p:14, raw:true, id:"item-aloha-maki_1bc35951-895c-4cba-97ac-1fdcac7f521e"},
+  {n:"Mayan Maki", d:"Spicy salmon mix, tuna, apple, avocado, jalapeño, tempura crunch, sriracha", p:14, raw:true, id:"item-mayan-maki_e9b8925f-97f9-4c27-b4c7-7dcdf4272303"},
+  {n:"Snow Luxe Maki", d:"Shrimp tempura, avocado, cucumber, spicy mayo, topped with a crab and kani mix, eel sauce", p:18, id:"item-snow-luxe-maki_18ba3674-4255-4cf0-83f6-ea9ac641664e"},
+  {n:"Zen Garden", d:"Sweet potato tempura, whipped cream cheese, topped with avocado, tempura crunch, kabayaki sauce, spicy mayo", p:12, id:"item-zen-garden_9b399490-c002-4107-b625-4f137d88df26"},
+  {n:"Toro Dragonfruit", d:"", p:22, id:"item-toro-dragonfruit_870fd4a4-6c87-4de4-885d-84a234c0dc41"},
+  {n:"Kaizen Maki", d:"", p:18, id:"item-kaizen-maki_01a7894d-f499-49f1-b94b-fe75c999f7f6"},
+  {n:"Spring Maki", d:"", p:18, id:"item-spring-maki_c30c1ef4-d5a0-40b1-8c8f-397f6d57803c"}
+ ]},
+ { key:"classic", title:"Classic Maki", jp:"Maki", note:"Hand roll +$1.50.", items:[
+  {n:"Spicy Tuna Maki", d:"Spicy tuna mix, tuna, cucumber, spicy mayo", p:11, raw:true, spicy:1, id:"item-spicy-tuna-maki_0517b394-81d1-4ef6-8e85-aa2b17b49e66"},
+  {n:"Spicy Salmon Maki", d:"Spicy salmon mix, salmon, cucumber, spicy mayo", p:10, raw:true, spicy:1, id:"item-spicy-salmon-maki_9592c122-a65a-4da7-a169-94cf24c05d9b"},
+  {n:"Tiger Eye Maki", d:"Salmon, tuna, asparagus, kabayaki sauce, spicy mayo, lightly tempura fried", p:12, raw:true, id:"item-tiger-eye-maki_7e437e7a-608a-438f-b85a-c62da0ceeed2"},
+  {n:"Kogeta Maki", d:"Spicy salmon mix, lightly torched salmon belly, apple, tempura crunch, kabayaki sauce, spicy mayo", p:13, raw:true, id:"item-kogeta-maki_547d562c-184c-4835-917f-e2cfb2d97e9e"},
+  {n:"Rainbow Maki", d:"California, topped with salmon, tuna, white fish, shrimp", p:14, raw:true, id:"item-rainbow-maki_12da78d2-f850-49a4-b971-db8891f2155e"},
+  {n:"Dragon Maki", d:"Shrimp tempura, cucumber, spicy mayo, topped with eel, avocado and kabayaki sauce", p:12, id:"item-dragon-maki_cf9528e9-d5ed-467a-be49-0ab3dc8e2a83"},
+  {n:"Spider Maki", d:"Soft shell crab tempura, crab stick, apple, avocado, kabayaki sauce, spicy mayo. 8 pieces", p:14, id:"item-spider-maki_6de2d845-544a-4ca8-9660-0801afca05b9"},
+  {n:"Spicy Negihama Maki", d:"Spicy yellowtail mix, cucumber, jalapeño, scallions, spicy mayo", p:11, raw:true, spicy:1, id:"item-spicy-negihama-maki_87571d0f-93f3-4a3b-8a62-a5e582800402"},
+  {n:"Alaskan Maki", d:"Smoked salmon, cream cheese, avocado, cucumber, kabayaki sauce", p:10, raw:true, id:"item-alaskan-maki_ffcdff16-d820-46f4-9bf3-0a371195a794"},
+  {n:"Shrimp Tempura Maki", d:"Shrimp tempura, avocado, cucumber, kabayaki sauce, spicy mayo. 5 pieces", p:10, id:"item-shrimp-tempura-maki_bcafbf34-4fab-4bf1-aa29-b25ce7fd039b"},
+  {n:"California Maki", d:"Crab stick, avocado, cucumber", p:8, id:"item-california-maki_0dba021c-9e96-4c6e-9cc9-5bccc10ed018"},
+  {n:"Tekka Maki", d:"Tuna roll", p:9, raw:true, id:"item-tekka-maki_fae11fe4-976b-43fb-afa9-8fae1667bbd4"},
+  {n:"Sake Maki", d:"Salmon roll", p:8, raw:true, id:"item-sake-maki_0ae5685a-687b-42c7-9383-2132775c2b98"},
+  {n:"Yellowtail Scallion Maki", d:"", p:8, raw:true, id:"item-yellowtail-scallion-maki_e48d3cd9-bf3e-40a4-a2e9-ceafeb30d25b"},
+  {n:"Una Avo Maki", d:"Eel, kabayaki sauce, avocado", p:9, id:"item-una-avo-maki_52b75ed0-f377-49a5-aaaf-e282046253ce"},
+  {n:"Una Kyu Maki", d:"Eel, kabayaki sauce, cucumber", p:9, id:"item-una-kyu-maki_a97bf0c9-a45a-4c8c-aeb7-9bfc22c513fa"},
+  {n:"Idaho Maki", d:"Sweet potato tempura, kabayaki sauce", p:8, id:"item-idaho-maki_090c94bb-e692-4a86-b9bf-058f00413058"},
+  {n:"Avocado Maki", d:"", p:7, id:"item-avocado-maki_90d224b7-6df0-42fc-8b69-4959e5151dda"},
+  {n:"Cucumber Maki", d:"", p:6, id:"item-cucumber-maki_a7c830ef-2d8b-470e-86ae-94778d183aae"},
+  {n:"Beetle Temaki", d:"", p:10, id:"item-beetle-temaki_1b1a2421-7bee-4af7-b8cc-1a057c9f82ef"}
+ ]},
+ { key:"nigiri", title:"Nigiri & Sashimi", jp:"Nigiri", note:"Nigiri: 2 pieces over sushi rice, contains wasabi. Sashimi: 3–4 slices, fish only, +$2.", items:[
+  {n:"Otoro", d:"", p:22, raw:true, id:"item-otoro_08075384-4d27-4f25-a6e6-d3a07df91b00"},
+  {n:"Kinmedai", d:"", p:11, raw:true, src:"site"},
+  {n:"Madai", d:"", p:10, raw:true, id:"item-madai_3e4640b5-c39e-4e89-b6c5-54e38de6d44d"},
+  {n:"Salmon Belly", d:"", p:10, raw:true, id:"item-salmon-belly_10be42ab-627e-4af6-8297-505676fb72d8"},
+  {n:"Uni", d:"", p:10, raw:true, oos:true, id:"item-uni_27b00f2b-1781-4d48-aa46-6752bdfdf8b5"},
+  {n:"Japanese Uni", d:"", p:20, raw:true, oos:true, id:"item-japanese-uni_38572ac0-fa59-4e6c-bfdc-7d00f90ec8a3"},
+  {n:"Scallop", d:"", p:9, raw:true, id:"item-scallop_29842b5c-210e-4376-8047-05cee70ffcb4"},
+  {n:"Ikura", d:"", p:9, raw:true, id:"item-ikura_614ab01d-2115-4025-8a25-5afad440ff3b"},
+  {n:"Marinated Tuna", d:"", p:9, raw:true, id:"item-marinated-tuna_0cecf9b0-7804-41db-aa90-fc2ec17d9c4b"},
+  {n:"Zuke Salmon", d:"", p:9, raw:true, id:"item-zuke-salmon_917b87c0-2db8-409e-850b-00b2d0e4cde4"},
+  {n:"Tuna", d:"", p:8, raw:true, id:"item-tuna_a02b46db-4d5b-4d0e-bec1-667b36ecdf65"},
+  {n:"Salmon", d:"", p:8, raw:true, id:"item-salmon_874cac5a-90e7-4541-882b-12cf9f89170d"},
+  {n:"Yellowtail", d:"", p:8, raw:true, id:"item-yellowtail_28e6d7e1-da2a-41a6-9f8f-4306561adefb"},
+  {n:"Smoked Salmon", d:"", p:8, raw:true, id:"item-smoked-salmon_6fa915f4-1441-46ed-8319-29e2ee8f1826"},
+  {n:"Eel", d:"", p:8, id:"item-eel_18438af3-9df7-4143-b617-df0fb05630b7"},
+  {n:"Mackerel", d:"", p:8, raw:true, src:"site"},
+  {n:"Escolar", d:"", p:8, id:"item-escolar_8840eb75-e313-403b-b19c-1e9ddf4de8c0"},
+  {n:"Shrimp", d:"", p:6, id:"item-shrimp_09c4d0dd-5904-4fa9-a10e-c23e58f8d0a9"},
+  {n:"Kanikama", d:"", p:6, id:"item-kanikama_3e77ef2d-9ec6-4fdc-b4b8-0823be6a63a7"}
+ ]},
+ { key:"sets", title:"Sushi Sets", jp:"Sets", note:"", items:[
+  {n:"Nigiri Deluxe", d:"1 spicy salmon maki + 10 pieces of nigiri", p:35, raw:true, id:"item-nigiri-deluxe_cd9bbbb7-c886-4565-8029-b2c778427ef1", img:"nigiri", feat:true},
+  {n:"Sashimi Deluxe", d:"1 spicy tuna maki + 12 slices of sashimi", p:42, raw:true, id:"item-sashimi-deluxe_f7acb59c-622a-4bd1-9506-eadc2e385735"},
+  {n:"Salmon Lover Set", d:"Spicy salmon roll, salmon crudo, salmon sashimi and salmon sushi", p:25, raw:true, id:"item-salmon-lover-set_f42ec3ca-6a4e-4ebf-84cc-b292133927cd"},
+  {n:"Maki Trio", d:"1 Tiger Eye maki, 1 spicy salmon maki and 1 spicy tuna maki", p:29, raw:true, id:"item-maki-trio_03c76e1f-6784-44c2-a9fb-e10c5a53f903"},
+  {n:"Party of 2", d:"Spicy salmon, spicy tuna, bulgogi and shrimp tempura maki, 10 pieces of nigiri and 10 slices of sashimi", p:96, raw:true, id:"item-party-of-2_a1dc7625-6692-4c2a-ab49-bd599d076f2f"},
+  {n:"Chirashi", d:"", p:30, raw:true, id:"item-chirashi_2ad103d8-e8e4-4bd9-953f-73d7e2ced568"}
+ ]},
+ { key:"bar-apps", title:"From the Sushi Bar", jp:"Bar apps", note:"", items:[
+  {n:"Tuna Crispy Rice", d:"Tuna tartare, yuzu guacamole, spicy mayo, house-made ponzu, pickled red onions, furikake, crispy sushi rice. 3 pieces", p:16, raw:true, id:"item-tuna-crispy-rice_2101dacc-df90-4797-a412-478f6311cfc1", img:"crispyRice", feat:true},
+  {n:"Scorching Salmon", d:"Sliced salmon, citrus sauce, lightly torched with a herb flame", p:16, raw:true, id:"item-scorching-salmon_42689f1d-c9c7-4904-9ed9-3cbc798faeac"},
+  {n:"Hamachi Jalapeño Crudo", d:"Thinly sliced yellowtail, house-made ponzu, jalapeño", p:16, raw:true, id:"item-hamachi-jalapeo-crudo_030453ee-acdd-4a4d-8319-276d99234655"},
+  {n:"Toro Tataki", d:"", p:24, raw:true, id:"item-toro-tataki_65d0b7ff-a754-4f9a-8e05-4a171425a0b4"},
+  {n:"Tuna Tataki", d:"Seared tuna, radish, light vinaigrette, kabayaki sauce, sriracha, fried shallots, scallion, sesame", p:18, raw:true, id:"item-tuna-tataki_be5d1a27-bb21-49a4-abcc-01a46ff48505"},
+  {n:"Beef Tataki", d:"Seared beef, radish, light vinaigrette, kabayaki sauce, sriracha, fried shallots, scallion, sesame", p:16, raw:true, id:"item-beef-tataki_e9c36947-f6a3-473d-b856-c3c75f04976e", img:"beefTataki"},
+  {n:"Crab Avocado Salad", d:"Crab meat, kanikama, tobiko, spicy mayo, kabayaki sauce, dragon fruit tempura flakes, avocado", p:18, raw:true, id:"item-crab-avocado-salad_69170997-44e7-49b0-b643-f6d76a6b57ba", img:"crabSalad"},
+  {n:"Hamachi Kama", d:"Cooked yellowtail collar, ponzu, lemon", p:18, id:"item-hamachi-kama_ae629f33-f071-4164-9ff8-d5f594a0e6c7"},
+  {n:"Sashimi Salad", d:"", p:16, raw:true, id:"item-sashimi-salad_3a713707-2d7f-4c3e-8101-9425591775f8"},
+  {n:"Takoyaki", d:"", p:9, id:"item-takoyaki_6e31b484-03cb-4048-ad44-45b543c06d89"},
+  {n:"Fried Baby Octopus", d:"Kewpie mayo, eel sauce, tobiko", p:12, oos:true, id:"item-fried-baby-octopus_e5547919-d655-41c1-a11f-a5657c9d66ae"},
+  {n:"Seaweed Salad", d:"Sesame", p:7, id:"item-seaweed-salad_15093a89-330d-462d-a9b9-68887482d17c"},
+  {n:"Cucumber Salad", d:"", p:7, id:"item-cucumber-salad_300a2797-a217-449c-acac-77a8acf53ba4"}
+ ]},
+ { key:"kitchen", title:"From the Kitchen", jp:"Kitchen apps", note:"", items:[
+  {n:"Fried Chicken Bao", d:"Steamed buns, fried chicken, spicy cabbage slaw, spicy mayo, pickled red onions, sesame. 2 pieces", p:12, spicy:1, id:"item-fried-chicken-bao_4d245b73-35a1-4469-953d-b2c3e8a07b68", img:"bao", feat:true},
+  {n:"Spicy Beef Bao", d:"Steamed buns, spicy bulgogi beef, cabbage slaw, spicy mayo, pickled red onions, sesame. 2 pieces", p:13, spicy:1, id:"item-spicy-beef-bao_3965e782-89c5-4156-846d-ec337a5ee54a"},
+  {n:"Chicken Karaage", d:"Fried chicken bites, spicy mayo, watermelon radish, togarashi", p:11, id:"item-chicken-karaage_47b61741-5e96-45a0-b690-afce4ec95214", img:"karaage"},
+  {n:"Gyoza", d:"Pan-seared chicken and pork dumplings, house-made dipping sauce, togarashi. 6 pieces", p:9, id:"item-gyoza_4695e0d8-6b97-4996-8aea-c11fae48d970"},
+  {n:"Spicy Edamame", d:"Soybeans, garlic butter, pepper flakes", p:8, spicy:1, id:"item-spicy-edamame_cb825151-33fa-426e-bcaf-a0461da5f2d8", img:"edamame"},
+  {n:"Steamed Edamame", d:"Salted soybeans", p:6, oos:true, id:"item-steamed-edamame_d18f3026-371b-4fe5-99fc-c61368ce07f1"},
+  {n:"Double Fried Wings", d:"", p:11, id:"item-double-fried-wings_0b571127-83ad-4928-a5b1-a07b4ef3d464"},
+  {n:"Crab Rangoon", d:"", p:9, id:"item-crab-rangoon_2c1f6abc-eb4e-4446-91df-2d38a54c7ae7"},
+  {n:"Miso Soup", d:"Tofu, seaweed, scallions", p:4, id:"item-miso-soup_368286d4-486f-4bdc-973b-fd3f526907ea"}
+ ]},
+ { key:"rice", title:"Rice Plates", jp:"Rice", note:"Served with steamed rice.", items:[
+  {n:"Chicken Katsu", d:"Breaded and fried chicken cutlet, tonkatsu sauce, cabbage slaw", p:19, id:"item-chicken-katsu_e20a79fe-5bb8-4f5d-ae48-88979c1ebaf2", img:"katsu", feat:true},
+  {n:"Lemon Butter Salmon", d:"Grilled salmon, lemon butter roux, teriyaki sauce, sautéed spinach, pickled red onions, chili oil", p:22, id:"item-lemon-butter-salmon_4681f5a4-4a28-4feb-9ded-ba66b4720fbe", img:"salmon"},
+  {n:"Hibachi Beef", d:"Beef cooked in garlic butter and soy sauce, sautéed vegetables, sesame mustard", p:28, raw:true, id:"item-hibachi-beef_7fd8e777-7361-44f0-9a12-01a7025b3d24"},
+  {n:"Spicy Beef", d:"Stir-fried beef slices and onions in spicy bulgogi sauce, sautéed vegetables", p:23, raw:true, spicy:1, id:"item-spicy-beef_7eec406a-a5f1-4e1c-896e-7f5f244478ea"},
+  {n:"Spicy Chicken", d:"Stir-fried chicken and onions in spicy bulgogi sauce, sautéed vegetables, fried egg", p:19, raw:true, spicy:1, id:"item-spicy-chicken_de6414ff-e3b0-4b1f-84fc-4a37fb639780", img:"spicyChicken"},
+  {n:"Spicy Fried Chicken", d:"Fried chicken in spicy bulgogi sauce, sautéed vegetables", p:21, spicy:1, id:"item-spicy-fried-chicken_36832df6-3d76-47a2-a1aa-794d67e909f5"},
+  {n:"Sweet & Spicy Shrimp", d:"Flash-fried battered shrimp, sweet and spicy sauce", p:24, spicy:1, id:"item-sweet-spicy-shrimp_853d9791-e3b2-4fb3-bc8a-0525ce2cf3f6"},
+  {n:"Beef Teriyaki", d:"Sautéed vegetables", p:23, id:"item-beef-teriyaki_7f68a042-afe2-42fe-b14e-080f5fb74cc9", img:"beefTeri"},
+  {n:"Chicken Teriyaki", d:"Sautéed vegetables", p:19, id:"item-chicken-teriyaki_057cd86c-bd8d-42b1-80ef-249acf192c37"}
+ ]},
+ { key:"noodles", title:"Noodles & Udon", jp:"Noodles", note:"", items:[
+  {n:"Santaka Beef Noodle", d:"Spicy bulgogi beef and onions, fried shallots, chili oil, scallions, sesame, noodles tossed in Japanese chili pepper sauce", p:23, raw:true, spicy:2, id:"item-santaka-beef-noodle_7adec39e-9436-43f8-99c4-87e6ecc752bb", img:"santaka", feat:true},
+  {n:"Santaka Shrimp Noodle", d:"Spicy shrimp, sautéed spinach, fried shallots, chili oil, scallions, noodles tossed in Japanese chili pepper sauce", p:22, spicy:2, id:"item-santaka-shrimp-noodle_d72e7fbe-5660-4d53-b7b4-06b2721366da"},
+  {n:"Stir-Fried Noodles", d:"Mixed vegetables, stir-fried in house sauce", p:18, id:"item-stirfried-noodles_a998f035-2b7e-493b-8758-1527db08e54a", img:"stirfry"},
+  {n:"XO Vegan", d:"Marinated tofu, house-made mushroom XO, fried shallots, marinated bean sprouts, chili oil, scallion, sesame", p:20, oos:true, id:"item-xo-vegan_b9ed898c-8e43-4e30-b970-44392df985ad"},
+  {n:"Katsu Udon", d:"Chicken broth, miso tare, sautéed oyster mushrooms, fried chicken, fried shallots, scallion, chili oil", p:16, id:"item-katsu-udon_4ba1ffc0-bcab-4b8f-bea5-8ccd6fff84b9"},
+  {n:"Chili Crisp Udon", d:"Chicken broth, miso tare, stir-fried bean sprouts, chashu pork, chili crisp, scallion", p:17, id:"item-chili-crisp-udon_bff32ea6-befa-4b2f-b0c6-cb34eba1c2c8"},
+  {n:"Shoyu Udon", d:"Chicken broth, shoyu tare, chashu pork, scallion, poached egg, chili oil, fried shallots", p:17, id:"item-shoyu-udon_8c3dc299-1232-4cdd-8c99-47c7de1a6f8d"}
+ ]},
+ { key:"lunch", title:"Lunch", jp:"Lunch", note:"Lunch menu as published on osharesushi.com. Lunch hours: confirm with the restaurant.", items:[
+  {n:"Oshare Sushi Combo", d:"1 Tiger Eye maki + 5 pieces nigiri, chef's choice", p:24, raw:true},
+  {n:"Nori Maki Combo", d:"1 salmon maki, 1 tuna maki, 1 yellowtail maki", p:20, raw:true},
+  {n:"Spicy Salmon + Spicy Tuna", d:"1 spicy salmon and 1 spicy tuna maki", p:19, raw:true, spicy:1},
+  {n:"Spicy Crab Stick + Spicy Salmon", d:"1 spicy California maki + 1 spicy salmon maki", p:16, raw:true, spicy:1},
+  {n:"Kogi Beef Rice Bowl", d:"Spicy bulgogi beef and onions, poached egg, spinach, mixed veggies, scallions, sesame", p:18, raw:true, spicy:1},
+  {n:"Chicken Teriyaki Rice Bowl", d:"Poached egg, spinach, mixed veggies, spicy mayo, pickled onions, scallions, sesame", p:16, raw:true}
+ ]},
+ { key:"dessert", title:"Desserts", jp:"Sweet", note:"", items:[
+  {n:"Mango Cheesecake", d:"", p:9, id:"item-mango-cheesecake_d9eba6c6-b512-48ef-9e13-86dc1748b8d1"},
+  {n:"Fried Cheesecake", d:"", p:10, id:"item-fried-cheese-cake-_955f1172-4147-4660-a579-b55c292fca0f"},
+  {n:"Fried Ice Cream", d:"", p:9, id:"item-fried-ice-cream_1d87b77a-6bd9-4cba-a1b7-5d88eff6287b"},
+  {n:"Ice Cream", d:"", p:4, id:"item-ice-cream_45ee2853-0e1c-45dd-abaf-a1a653ca803c"}
+ ]},
+ { key:"sides", title:"Sides & Sauces", jp:"Sides", note:"", items:[
+  {n:"Sushi Rice", d:"", p:4, id:"item-sushi-rice_e16e6092-c6e0-41ed-a775-3b3b61dd6a17"},
+  {n:"White Rice", d:"", p:3.5, id:"item-white-rice_155ea645-a133-415c-92f6-cb73357a7280"},
+  {n:"Ghost Pepper Sate", d:"Very spicy", p:1, spicy:2, id:"item-ghost-pepper-sate_7482dfe1-34db-4d1a-8fbb-2e3bca176f6c"},
+  {n:"Chili Crisp", d:"", p:1, id:"item-chili-crisp_0e4f218b-bd86-49eb-9704-4d9957e8ba50"},
+  {n:"Ponzu Sauce", d:"", p:1, id:"item-ponzu-sauce_ddd68499-b44e-4f1e-a851-ee5d2342d1df"},
+  {n:"Sriracha", d:"", p:1, id:"item-sriracha_c46f83a1-654a-40b2-95f4-9017c6dcd9a3"},
+  {n:"Spicy Mayo", d:"", p:0.75, id:"item-spicy-mayo_dc79fc5d-1741-4bbc-8411-8af122201730"},
+  {n:"Chili Oil", d:"", p:0.75, id:"item-chili-oil_92fe13d8-1cfc-4588-922b-9987405661fb"},
+  {n:"Teriyaki Sauce", d:"", p:0.75, id:"item-teriyaki-sauce_269dd87f-4b54-4d85-967e-6a972dfa2248"},
+  {n:"Unagi Sauce", d:"", p:0.75, id:"item-unagi-sauce_6c0a187e-e485-4315-b559-84b41696b833"}
+ ]}
+];
