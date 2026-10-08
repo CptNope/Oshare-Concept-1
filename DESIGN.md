@@ -134,6 +134,11 @@ The build is a five-page Persuade surface (site) plus a Read surface (brand book
 - Plates grid: one wide plate (8 cols, 5:2 crop) beside a narrow one, then three across; single column under 600px.
 - Menu: two dish columns with hairlines, sticky section chips + search + filters under the header.
 - Mobile: sticky header with short "Order" button; fixed bottom bar (Order pickup / Call / Directions).
+- Breakpoints are written in **em** (26.25 / 37.5 / 45 / 53.75 / 57.5 / 65em) so layouts follow the reader's default text size, not just the window width.
+- Narrowest phones (≤ 22.5em): the header shows the compact ensō mark only; the bottom bar stacks icon over label for Call and Directions.
+- Menu toolbar on phones is one sticky row: category chips plus a "Search & filter" toggle (dot = filters active). Search and filters open beneath it.
+- Short viewports (≤ 30em tall, phones held sideways): the header stops sticking and the bottom bar slims to 44px so content keeps the screen.
+- Coarse pointers get 44px minimum targets; hover lift and rings are dropped on touch in favor of press feedback. Horizontal scrollers fade their trailing edge.
 
 ## Elevation & Depth
 

@@ -8,9 +8,9 @@
 .hub-lockup { position: relative; width: min(100%, 440px); aspect-ratio: 1000 / 1052; justify-self: center; }
 .hub-lockup .enso { position: absolute; inset: 0; width: 100%; }
 .hub-lockup .wordmark { position: absolute; left: 18.4%; top: 42.3%; width: 73.1%; color: var(--on-cobalt); }
-@media (max-width: 860px) { .hub-hero__in { grid-template-columns: 1fr; } .hub-lockup { order: -1; width: min(70vw, 320px); } }
+@media (max-width: 53.75em) { .hub-hero__in { grid-template-columns: 1fr; } .hub-lockup { order: -1; width: min(70vw, 320px); } }
 .hub-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.5rem); }
-@media (max-width: 760px) { .hub-cards { grid-template-columns: 1fr; } }
+@media (max-width: 47.5em) { .hub-cards { grid-template-columns: 1fr; } }
 .hub-card { display: grid; gap: 1.1rem; text-decoration: none; color: var(--ink); }
 .hub-card__img { display: block; overflow: hidden; background: var(--glaze-2); box-shadow: 0 0 0 1px var(--line); }
 .hub-card__img img { width: 100%; transition: transform 1s var(--ease); }
@@ -25,6 +25,7 @@
 .hub-list a:hover code { text-decoration: underline; text-decoration-color: var(--enso); }
 .hub-list code { font: 500 .92rem/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
 .hub-list span { color: var(--on-cobalt-2); }
-@media (max-width: 640px) { .hub-list li { grid-template-columns: 1fr; } }
+@media (max-width: 40em) { .hub-list li { grid-template-columns: 1fr; } }
 .hub-notes p { max-width: 72ch; color: var(--ink-2); font-size: var(--fs-sm); }
 .hub-notes b { color: var(--ink); }
+@media (pointer: coarse) { .hub-list a { min-height: 44px; } }

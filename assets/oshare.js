@@ -109,8 +109,17 @@
     }
     [noRaw, hot].forEach(function (b) { if (b) b.addEventListener("click", function () { b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); apply(); }); });
     if (q) q.addEventListener("input", apply);
+    /* phones: search + filters live behind one toggle so the sticky bar stays one row */
+    var mt = document.querySelector(".mtools"), ft = document.querySelector(".ftoggle"), dot = document.querySelector(".ftoggle__dot");
+    if (mt && ft) {
+      var setOpen = function (open) { mt.dataset.filters = open ? "open" : "closed"; ft.setAttribute("aria-expanded", String(open)); };
+      ft.addEventListener("click", function () { var open = mt.dataset.filters !== "open"; setOpen(open); if (open && q) q.focus(); });
+      mt.addEventListener("keydown", function (e) { if (e.key === "Escape" && mt.dataset.filters === "open") { setOpen(false); ft.focus(); } });
+      var mark = function () { var active = (q && q.value.trim()) || (noRaw && noRaw.getAttribute("aria-pressed") === "true") || (hot && hot.getAttribute("aria-pressed") === "true"); if (dot) dot.hidden = !active; };
+      [q, noRaw, hot].forEach(function (el) { if (el) el.addEventListener(el === q ? "input" : "click", mark); });
+    }
     var clear = document.getElementById("menu-clear");
-    if (clear) clear.addEventListener("click", function () { if (q) q.value = ""; [noRaw, hot].forEach(function (b) { if (b) b.setAttribute("aria-pressed", "false"); }); apply(); if (q) q.focus(); });
+    if (clear) clear.addEventListener("click", function () { if (q) q.value = ""; [noRaw, hot].forEach(function (b) { if (b) b.setAttribute("aria-pressed", "false"); }); apply(); if (q) { q.dispatchEvent(new Event("input")); q.focus(); } });
   }
 
   /* ---------- gallery lightbox ---------- */

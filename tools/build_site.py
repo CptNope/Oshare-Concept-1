@@ -274,7 +274,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
         <h2 id="visit-h" style="font-size:var(--fs-h2)">Find us on Market Street.</h2>
         <p class="addr">350 Market Street<br>Lowell, MA 01852</p>
         <div class="facts">
-          <div class="fact">{ico('phone')}<div><span class="tnum">{PHONE}</span> <button class="chip" style="min-height:32px;color:var(--on-cobalt);border-color:var(--on-cobalt-2)" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">No online reservations. Call us or walk in.</span></div></div>
+          <div class="fact">{ico('phone')}<div><span class="tnum">{PHONE}</span> <button class="chip" style="color:var(--on-cobalt);border-color:var(--on-cobalt-2)" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">No online reservations. Call us or walk in.</span></div></div>
           <div class="fact">{ico('car')}<div>Parking nearby <span class="note">Lot vs. street: listings disagree, confirm</span></div></div>
         </div>
         <div class="hero__cta"><a class="btn" href="{DIRS}" target="_blank" rel="noopener">{ico('pin')}Get directions</a><a class="btn btn--ghost" href="visit.html">Visiting details</a></div>
@@ -333,10 +333,11 @@ menu = head("Menu | Oshare Sushi + Bar, Lowell MA — Specialty Maki, Nigiri, No
     <span class="enso paint" aria-hidden="true"></span>
     <div class="wrap phead__in"><h1 id="menu-h">The menu</h1><p>Every roll, plate and price from our ordering menu. Tap a dish to add it to a pickup order. <span class="note">Captured from Toast Oct 8, 2026. Live site syncs automatically.</span></p></div>
   </section>
-  <div class="mtools">
+  <div class="mtools" data-filters="closed">
     <div class="wrap mtools__in">
       <nav class="cats" aria-label="Menu sections">{cats_nav}</nav>
-      <div class="filters" role="group" aria-label="Filter dishes">
+      <button class="ftoggle" type="button" aria-expanded="false" aria-controls="menu-filters">{ico('search')}<span>Search &amp; filter</span><span class="ftoggle__dot" hidden></span></button>
+      <div class="filters" id="menu-filters" role="group" aria-label="Filter dishes">
         <label class="search"><span class="sr-only">Search the menu</span>{ico('search')}<input id="menu-search" type="search" placeholder="Search dishes" autocomplete="off"></label>
         <button class="chip" id="f-noraw" type="button" aria-pressed="false">No raw fish</button>
         <button class="chip" id="f-hot" type="button" aria-pressed="false"><span class="mark mark--hot" aria-hidden="true"><svg><use href="#i-chili"/></svg></span>Spicy</button>
@@ -440,7 +441,7 @@ visit = head("Hours & Directions | Oshare Sushi + Bar, 350 Market St, Lowell MA"
           <span class="mapcard__label">{ico('pin')}350 Market St · Open map</span>
         </a>
         <div class="facts">
-          <div class="fact">{ico('phone')}<div><b class="tnum">{PHONE}</b> <button class="chip" style="min-height:32px" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">We don't take online reservations. Call us, or walk in.</span></div></div>
+          <div class="fact">{ico('phone')}<div><b class="tnum">{PHONE}</b> <button class="chip" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">We don't take online reservations. Call us, or walk in.</span></div></div>
           <div class="fact">{ico('bag')}<div><b>Pickup and delivery</b><br><span class="muted">Order directly through our online ordering. <a href="{ORDER}" target="_blank" rel="noopener">Start an order</a></span></div></div>
           <div class="fact">{ico('gift')}<div><b>Gift cards and rewards</b><br><span class="muted">Buy an <a href="{TOAST_GIFT}" target="_blank" rel="noopener">Oshare gift card</a>. Online orders earn rewards points with a free account.</span></div></div>
           <div class="fact">{ico('car')}<div><b>Parking</b><br><span class="muted">Street and nearby lot parking downtown.</span> <span class="note">Confirm: listings say both "street only" and "adjacent lot"</span></div></div>
