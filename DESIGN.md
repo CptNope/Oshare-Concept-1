@@ -159,6 +159,7 @@ Flat and tonal. Depth comes from cobalt fields against glaze, not shadows. One s
 - **Dish row (menu)** — mincho name, RAW pill and chili marks (never color alone), right-aligned display-face price, gothic description, "Add to order" link to the Toast item. Optional 112px photo. Sold-out: struck price + orange "Sold out today".
 - **Plate card (home)** — 5:4 photo (5:2 when wide), ensō fades in on hover/focus, name + price row, description, order link.
 - **Rim rule**, **cobalt field**, **page header** (cobalt field with a painted ensō bleeding off the right edge).
+- **Resilience** — every page works without JavaScript (static "Open Tue–Sun" status, visible nav row on phones, gallery tiles link to the photos; search, filters, copy and the notes toggle hide). Order links name their dish for screen readers and announce new tabs. Failed images fall back to the brand ground.
 - **Pitch note** — dashed orange pill marking facts that need owner confirmation; toggled from the footer. Prototype-only; remove in production.
 
 ## Do's and Don'ts

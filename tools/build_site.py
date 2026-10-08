@@ -42,7 +42,7 @@ def hot_mark(n):
     return f'<span class="mark mark--hot" role="img" aria-label="{label}">' + "".join(f'<svg aria-hidden="true"><use href="#i-chili"/></svg>' for _ in range(n)) + "</span>"
 
 def raw_mark(r):
-    return '<span class="mark mark--raw" title="Served raw or undercooked">RAW<span class="sr-only"> — served raw or undercooked</span></span>' if r else ""
+    return '<span class="mark mark--raw" title="Served raw or undercooked">RAW<span class="sr-only">, served raw or undercooked</span></span>' if r else ""
 
 HOURS_ROWS = [("Sunday", 0, "11:30 AM – 9 PM"), ("Monday", 1, "Closed"), ("Tuesday", 2, "4 – 9 PM"), ("Wednesday", 3, "4 – 9 PM"),
               ("Thursday", 4, "4 – 9 PM"), ("Friday", 5, "11:30 AM – 10 PM"), ("Saturday", 6, "11:30 AM – 10 PM")]
@@ -96,7 +96,7 @@ def header(cur):
     <a class="brand" href="./" aria-label="Oshare Sushi + Bar, home"><span class="enso" aria-hidden="true"></span><span class="wordmark" aria-hidden="true"></span></a>
     <nav class="nav" id="site-nav" aria-label="Main">{links}</nav>
     <div class="hdr__act">
-      <span class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Hours</b> <span data-status-detail></span></span></span>
+      <span class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Open Tue–Sun</b> <span data-status-detail>Closed Mondays</span></span></span>
       <a class="btn btn--sm" href="{ORDER}" rel="noopener" target="_blank">{ico("bag")}<span class="long">Order pickup</span><span class="short">Order</span></a>
       <button class="menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">{ico("menu")}</button>
     </div>
@@ -157,7 +157,7 @@ def plate(name, img, cls, alt):
   <div class="plate__img"><img src="img/{img}.jpg" alt="{e(alt)}" loading="lazy" width="720" height="576"><span class="enso plate__ring" aria-hidden="true"></span></div>
   <div class="plate__row"><h3>{e(it['n'])}</h3><span class="price">{money(it['p'])}</span></div>
   <p>{e(it['d'])} {raw_mark(it.get('raw'))} {hot_mark(it.get('spicy'))}</p>
-  <a class="link-arrow" href="{item_url(it)}" target="_blank" rel="noopener">Add to pickup order{ico('arrow')}</a>
+  <a class="link-arrow" href="{item_url(it)}" target="_blank" rel="noopener">Add <span class="sr-only">{e(it['n'])} </span>to pickup order{ico('arrow')}</a>
 </article>"""
 
 def named(name, why):
@@ -179,7 +179,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
         <a class="btn btn--ghost" href="menu.html">See the menu</a>
       </div>
       <div class="hero__meta">
-        <span class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Hours</b> · <span data-status-detail></span></span></span>
+        <span class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Open Tue–Sun</b> · <span data-status-detail>Closed Mondays</span></span></span>
         <span>350 Market St, Lowell</span>
       </div>
     </div>
@@ -192,7 +192,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
 
   <section class="tonight" aria-label="Today">
     <div class="wrap tonight__in">
-      <p class="tonight__state status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Hours</b> <span class="muted" data-status-detail style="font-family:var(--sans);font-size:var(--fs-sm);font-weight:400"></span></span></p>
+      <p class="tonight__state status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Open Tue–Sun</b> <span class="muted" data-status-detail style="font-family:var(--sans);font-size:var(--fs-sm);font-weight:400">Closed Mondays</span></span></p>
       <div class="tonight__hours tnum">{hours_list()}</div>
       <div class="tonight__acts"><a class="btn btn--sm" href="{ORDER}" target="_blank" rel="noopener">{ico('bag')}Order pickup</a><a class="btn btn--sm btn--ghost" href="{DIRS}" target="_blank" rel="noopener">{ico('pin')}Directions</a></div>
     </div>
@@ -274,7 +274,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
         <h2 id="visit-h" style="font-size:var(--fs-h2)">Find us on Market Street.</h2>
         <p class="addr">350 Market Street<br>Lowell, MA 01852</p>
         <div class="facts">
-          <div class="fact">{ico('phone')}<div><span class="tnum">{PHONE}</span> <button class="chip" style="color:var(--on-cobalt);border-color:var(--on-cobalt-2)" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">No online reservations. Call us or walk in.</span></div></div>
+          <div class="fact">{ico('phone')}<div><a class="tnum" href="tel:{PHONE_TEL}">{PHONE}</a> <button class="chip js-only" style="color:var(--on-cobalt);border-color:var(--on-cobalt-2)" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">No online reservations. Call us or walk in.</span></div></div>
           <div class="fact">{ico('car')}<div>Parking nearby <span class="note">Lot vs. street: listings disagree, confirm</span></div></div>
         </div>
         <div class="hero__cta"><a class="btn" href="{DIRS}" target="_blank" rel="noopener">{ico('pin')}Get directions</a><a class="btn btn--ghost" href="visit.html">Visiting details</a></div>
@@ -294,8 +294,8 @@ def menu_item(it):
     pic = f'<img class="mitem__img" src="img/{img}.jpg" alt="" loading="lazy" width="720" height="576">' if img else ""
     marks = raw_mark(it.get("raw")) + hot_mark(it.get("spicy"))
     oos = '<span class="oos">Sold out today</span>' if it.get("oos") else ""
-    act = (f'<div class="mitem__act"><a href="{item_url(it)}" target="_blank" rel="noopener">Add to order{ico("arrow")}</a>{oos}</div>'
-           if it.get("id") else f'<div class="mitem__act"><a href="{ORDER}" target="_blank" rel="noopener">Order online{ico("arrow")}</a>{oos}</div>')
+    act = (f'<div class="mitem__act"><a href="{item_url(it)}" target="_blank" rel="noopener">Add <span class="sr-only">{e(it['n'])} </span>to order{ico("arrow")}</a>{oos}</div>'
+           if it.get("id") else f'<div class="mitem__act"><a href="{ORDER}" target="_blank" rel="noopener">Order <span class="sr-only">{e(it['n'])} </span>online{ico("arrow")}</a>{oos}</div>')
     desc = f'<p class="mitem__desc">{e(it["d"])}</p>' if it.get("d") else ""
     return f"""<li class="{cls}" data-text="{e(text)}" data-raw="{str(bool(it.get('raw'))).lower()}" data-hot="{it.get('spicy', 0)}" data-oos="{str(bool(it.get('oos'))).lower()}">{pic}<h3>{e(it['n'])} {marks}</h3><span class="mitem__price">{money(it['p'])}</span>{desc}{act}</li>"""
 
@@ -338,14 +338,15 @@ menu = head("Menu | Oshare Sushi + Bar, Lowell MA — Specialty Maki, Nigiri, No
       <nav class="cats" aria-label="Menu sections">{cats_nav}</nav>
       <button class="ftoggle" type="button" aria-expanded="false" aria-controls="menu-filters">{ico('search')}<span>Search &amp; filter</span><span class="ftoggle__dot" hidden></span></button>
       <div class="filters" id="menu-filters" role="group" aria-label="Filter dishes">
-        <label class="search"><span class="sr-only">Search the menu</span>{ico('search')}<input id="menu-search" type="search" placeholder="Search dishes" autocomplete="off"></label>
+        <label class="search"><span class="sr-only">Search the menu</span>{ico('search')}<input id="menu-search" type="search" placeholder="Search dishes" autocomplete="off" enterkeyhint="search" maxlength="60" spellcheck="false" aria-describedby="menu-live"></label>
         <button class="chip" id="f-noraw" type="button" aria-pressed="false">No raw fish</button>
         <button class="chip" id="f-hot" type="button" aria-pressed="false"><span class="mark mark--hot" aria-hidden="true"><svg><use href="#i-chili"/></svg></span>Spicy</button>
+        <span class="mcount" id="menu-live" role="status" aria-live="polite"></span>
       </div>
     </div>
   </div>
   <div class="wrap">
-    <div class="legend"><span><span class="mark mark--raw" aria-hidden="true">RAW</span> Served raw or undercooked</span><span>{hot_mark(1)} Spicy</span><span>{hot_mark(2)} Very spicy</span><span id="menu-live" role="status" aria-live="polite"></span></div>
+    <div class="legend"><span><span class="mark mark--raw" aria-hidden="true">RAW</span> Served raw or undercooked</span><span>{hot_mark(1)} Spicy</span><span>{hot_mark(2)} Very spicy</span></div>
     <p class="mempty" id="menu-empty" hidden>No dishes match. <button class="chip" type="button" id="menu-clear">Clear filters</button></p>
     {''.join(sections)}
     <p class="muted" style="font-size:var(--fs-sm);padding-block:3rem 4rem;max-width:70ch">Consuming raw or undercooked meats, poultry, seafood, shellfish or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions. Before placing your order, please tell your server if anyone in your party has a food allergy. Prices and availability can change; our online ordering menu is always current. <span class="note">Confirm advisory wording with owner</span></p>
@@ -406,7 +407,7 @@ G = [("night", "The full table on dark wood: Nigiri Deluxe in the lacquer tray, 
      ("karaage", "Chicken Karaage with watermelon radish"), ("beefTataki", "Beef Tataki"), ("katsu", "Chicken Katsu with tonkatsu sauce and slaw"),
      ("salmon", "Lemon Butter Salmon"), ("crabSalad", "Crab Avocado Salad"), ("spicyChicken", "Spicy Chicken with fried egg"),
      ("beefTeri", "Beef Teriyaki"), ("edamame", "Spicy Edamame"), ("stirfry", "Stir-Fried Noodles")]
-tiles = "".join(f'<button type="button" data-caption="{e(c)}"><img src="img/{k}.jpg" alt="{e(c)}" loading="lazy"><span>{e(c)}</span></button>' for k, c in G)
+tiles = "".join(f'<a href="img/{k}.jpg" data-caption="{e(c)}"><img src="img/{k}.jpg" alt="" loading="lazy"><span>{e(c)}</span></a>' for k, c in G)
 gallery = head("Gallery | Oshare Sushi + Bar, Lowell MA", "Photos of sushi, maki, noodles and plates from Oshare Sushi + Bar on Market Street in Lowell, MA.", "gallery/") + header("gallery") + f"""
 <main id="main">
   <section class="phead field" aria-labelledby="gal-h">
@@ -415,7 +416,7 @@ gallery = head("Gallery | Oshare Sushi + Bar, Lowell MA", "Photos of sushi, maki
   </section>
   <section class="sec"><div class="wrap"><div class="gallery">{tiles}</div></div></section>
   <dialog class="lightbox" aria-label="Photo viewer">
-    <figure><img alt=""><figcaption class="lightbox__bar"><span></span><div><span data-count class="tnum" style="align-self:center;margin-right:.5rem"></span><button type="button" data-prev aria-label="Previous photo">Prev</button><button type="button" data-next aria-label="Next photo">Next</button><button type="button" data-close>Close</button></div></figcaption></figure>
+    <figure><div class="lightbox__img"></div><figcaption class="lightbox__bar"><span></span><div><span data-count class="tnum" style="align-self:center;margin-right:.5rem"></span><button type="button" data-prev aria-label="Previous photo">Prev</button><button type="button" data-next aria-label="Next photo">Next</button><button type="button" data-close>Close</button></div></figcaption></figure>
   </dialog>
 </main>
 """ + footer()
@@ -431,7 +432,7 @@ visit = head("Hours & Directions | Oshare Sushi + Bar, 350 Market St, Lowell MA"
   <section class="sec">
     <div class="wrap visit">
       <div style="display:grid;gap:2rem;align-content:start">
-        <div style="display:grid;gap:.75rem"><p class="addr">350 Market Street<br>Lowell, MA 01852</p><p class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Hours</b> · <span data-status-detail></span></span></p></div>
+        <div style="display:grid;gap:.75rem"><p class="addr">350 Market Street<br>Lowell, MA 01852</p><p class="status" data-status><span class="status__dot" aria-hidden="true"></span><span><b>Open Tue–Sun</b> · <span data-status-detail>Closed Mondays</span></span></p></div>
         {hours_table()}
         <div class="hero__cta"><a class="btn" href="{DIRS}" target="_blank" rel="noopener">{ico('pin')}Get directions</a><a class="btn btn--ghost" href="{MAPS}" target="_blank" rel="noopener">Open in Google Maps</a></div>
       </div>
@@ -441,7 +442,7 @@ visit = head("Hours & Directions | Oshare Sushi + Bar, 350 Market St, Lowell MA"
           <span class="mapcard__label">{ico('pin')}350 Market St · Open map</span>
         </a>
         <div class="facts">
-          <div class="fact">{ico('phone')}<div><b class="tnum">{PHONE}</b> <button class="chip" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">We don't take online reservations. Call us, or walk in.</span></div></div>
+          <div class="fact">{ico('phone')}<div><a class="tnum" href="tel:{PHONE_TEL}"><b>{PHONE}</b></a> <button class="chip js-only" type="button" data-copy="{PHONE}">Copy</button><br><span class="muted">We don't take online reservations. Call us, or walk in.</span></div></div>
           <div class="fact">{ico('bag')}<div><b>Pickup and delivery</b><br><span class="muted">Order directly through our online ordering. <a href="{ORDER}" target="_blank" rel="noopener">Start an order</a></span></div></div>
           <div class="fact">{ico('gift')}<div><b>Gift cards and rewards</b><br><span class="muted">Buy an <a href="{TOAST_GIFT}" target="_blank" rel="noopener">Oshare gift card</a>. Online orders earn rewards points with a free account.</span></div></div>
           <div class="fact">{ico('car')}<div><b>Parking</b><br><span class="muted">Street and nearby lot parking downtown.</span> <span class="note">Confirm: listings say both "street only" and "adjacent lot"</span></div></div>

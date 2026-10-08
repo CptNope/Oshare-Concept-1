@@ -49,11 +49,11 @@
 .ch__head h2 .n { font-family: var(--sans); font-size: .42em; font-weight: 700; color: var(--cobalt-2); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .ch__head p { color: var(--ink-2); font-size: var(--fs-lead); max-width: 60ch; }
 .ch h3 { font-size: var(--fs-h3); margin-bottom: .6rem; }
-.ch h4 { font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-2); margin-bottom: .5rem; }
+.ch h4, .ch .label { font-family: var(--sans); font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-2); margin-bottom: .5rem; }
 .ch p + p { margin-top: .8rem; }
 .ch .prose { max-width: 66ch; }
 .ch.field .ch__head p, .ch.field .muted { color: var(--on-cobalt-2); }
-.ch.field h4 { color: var(--on-cobalt-2); }
+.ch.field h4, .ch.field .label { color: var(--on-cobalt-2); }
 .ch.field { border-bottom: 0; }
 .ch.field .ch__head h2 .n { color: var(--enso-hi); }
 
@@ -120,7 +120,7 @@
 /* C — magazine */
 .artC { background: #FFD9C2; height: 100%; position: relative; overflow: hidden; }
 .artC img { position: absolute; right: -6%; bottom: -8%; width: 78%; transform: rotate(-4deg); box-shadow: 0 2cqw 4cqw rgba(0,0,0,.25); }
-.artC h5 { position: absolute; left: 4cqw; top: 3cqw; margin: 0; font: 900 15cqw/.85 "Arial Black", Arial, sans-serif; color: #1F3F80; letter-spacing: -.05em; }
+.artC .t { position: absolute; left: 4cqw; top: 3cqw; margin: 0; font: 900 15cqw/.85 "Arial Black", Arial, sans-serif; color: #1F3F80; letter-spacing: -.05em; }
 .artC p { position: absolute; left: 4cqw; top: 20cqw; margin: 0; width: 40cqw; font: 700 2.9cqw/1.25 Arial, sans-serif; color: #121212; }
 .artC p b { display: block; color: #E2450A; font-size: 3.6cqw; }
 .artC span.call { position: absolute; font: 700 2.3cqw/1 Arial, sans-serif; background: #121212; color: #fff; padding: .7cqw 1.4cqw; border-radius: 99px; }
@@ -220,11 +220,11 @@
 .ig .rimline { position: absolute; left: 0; right: 0; height: 2.6cqw; color: #F3F5F9; background: linear-gradient(currentColor, currentColor) top/100% 1.2cqw no-repeat, linear-gradient(currentColor, currentColor) bottom/100% .45cqw no-repeat; }
 .ig .ring { position: absolute; width: 40cqw; right: 5cqw; top: 5cqw; }
 .ig--type { display: grid; align-content: center; padding: 9%; gap: .9rem; }
-.ig--type h5 { margin: 0; font: 800 17cqw/.92 "Shippori Mincho B1", serif; letter-spacing: -.04em; }
+.ig--type .t { margin: 0; font: 800 17cqw/.92 "Shippori Mincho B1", serif; letter-spacing: -.04em; }
 .ig--type p { margin: 0; font: 500 4.6cqw/1.35 "Zen Kaku Gothic New", sans-serif; color: #B9C9EA; }
 .ig--type .p { font: 800 9cqw/1 "Shippori Mincho B1", serif; color: #FF9A5C; }
 .ig--story .top { position: absolute; top: 0; left: 0; right: 0; padding: 7cqw; display: grid; gap: 4cqw; background: #1F3F80; }
-.ig--story .top h5 { margin: 0; font: 800 12cqw/1 "Shippori Mincho B1", serif; letter-spacing: -.03em; }
+.ig--story .top .t { margin: 0; font: 800 12cqw/1 "Shippori Mincho B1", serif; letter-spacing: -.03em; }
 .ig--story .top p { margin: 0; font: 500 4.6cqw/1.4 "Zen Kaku Gothic New", sans-serif; color: #B9C9EA; }
 .ig--story img { position: absolute; top: 42%; height: 58%; }
 .ig--story .cta { position: absolute; bottom: 7cqw; left: 50%; transform: translateX(-50%); background: #F25A0A; color: #0B1A36; font: 700 4.8cqw/1 "Zen Kaku Gothic New", sans-serif; padding: 3.4cqw 6cqw; border-radius: 99px; white-space: nowrap; }
@@ -240,12 +240,12 @@
 .menucard__cover .lockup .wordmark { color: #F3F5F9; }
 .menucard__cover p { font: 500 1.5cqw/1.5 "Zen Kaku Gothic New", sans-serif; color: #B9C9EA; }
 .menucard__in { background: #FBFCFE; color: #0B1A36; padding: 4cqw; display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw; }
-.menucard__in h6 { margin: 0 0 1cqw; font: 800 2.8cqw/1 "Shippori Mincho B1", serif; color: #1F3F80; }
+.menucard__in .h { margin: 0 0 1cqw; font: 800 2.8cqw/1 "Shippori Mincho B1", serif; color: #1F3F80; }
 .menucard__in .r { height: .9cqw; background: linear-gradient(#1F3F80, #1F3F80) top/100% .45cqw no-repeat, linear-gradient(#1F3F80, #1F3F80) bottom/100% .15cqw no-repeat; margin-bottom: 1.4cqw; }
 .menucard__in dl { margin: 0; display: grid; gap: 1.3cqw; }
 .menucard__in dt { display: flex; justify-content: space-between; font: 700 1.55cqw/1.2 "Shippori Mincho B1", serif; }
 .menucard__in dd { margin: .3cqw 0 0; font: 400 1.15cqw/1.4 "Zen Kaku Gothic New", sans-serif; color: #3E4D6B; }
-@media (max-width: 47.5em) { .menucard { grid-template-columns: 1fr; } .menucard__cover { aspect-ratio: 3 / 2; } .menucard__in { grid-template-columns: 1fr; } .menucard__in dt { font-size: 3.4cqw; } .menucard__in dd { font-size: 2.6cqw; } .menucard__in h6 { font-size: 5cqw; } .menucard__cover p { font-size: 3cqw; } }
+@media (max-width: 47.5em) { .menucard { grid-template-columns: 1fr; } .menucard__cover { aspect-ratio: 3 / 2; } .menucard__in { grid-template-columns: 1fr; } .menucard__in dt { font-size: 3.4cqw; } .menucard__in dd { font-size: 2.6cqw; } .menucard__in .h { font-size: 5cqw; } .menucard__cover p { font-size: 3cqw; } }
 .pack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem); align-items: end; }
 @media (max-width: 53.75em) { .pack { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 32.5em) { .pack { grid-template-columns: 1fr; } }
@@ -315,7 +315,7 @@
 .voice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--cobalt-ink); }
 .voice > div { padding: 1rem 1.25rem 1rem 0; border-bottom: 1px solid var(--line); }
 .voice > div:nth-child(even) { padding-left: 1.25rem; border-left: 1px solid var(--line); }
-.voice h4 { margin-bottom: .35rem; }
+.voice .label { margin-bottom: .35rem; }
 .voice .say { font-family: var(--display); font-size: 1.15rem; font-weight: 700; }
 .voice .nosay { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--enso); }
 @media (max-width: 40em) { .voice { grid-template-columns: 1fr; } .voice > div:nth-child(even) { padding-left: 0; border-left: 0; } }
@@ -343,3 +343,9 @@
 .part-open > div { min-width: 0; }
 .check label > span { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width: 40em) { .check label { grid-template-columns: 1.6rem minmax(0, 1fr); } .check em { display: none; } }
+
+/* labels that are real headings keep heading semantics but read as small caps labels */
+.ch h3.label { font-size: var(--fs-xs); line-height: 1.3; letter-spacing: .12em; margin-bottom: .5rem; }
+.ch .label { margin-bottom: .5rem; }
+.tbl-wrap:focus-visible, .code pre:focus-visible { outline: 2.5px solid var(--enso); outline-offset: 3px; }
+.tag { justify-self: start; align-self: start; }

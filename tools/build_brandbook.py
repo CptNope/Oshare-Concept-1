@@ -125,7 +125,7 @@ CHECK = [
     ("Accounts", [("c-social", "Confirm Instagram @osharesushibar and facebook.com/OshareSushiBar"), ("c-gbp", "Grant Google Business Profile access (hours, menu link, photos)"), ("c-toast", "Grant a Toast user with Manage Integrations, confirm Toast plan tier"), ("c-domain", "Grant domain and DNS access for osharesushi.com")]),
     ("Imagery", [("c-photos", "Confirm we may use the existing food photography (and photographer credit)"), ("c-shoot", "Schedule a half-day shoot: room, bar, chefs, guests"), ("c-delivery", "Confirm which third-party delivery apps to mention, if any")]),
 ]
-check_html = "".join(f'<h4 style="margin-top:1.5rem">{g}</h4>' + "".join(f'<label for="{i}"><input type="checkbox" id="{i}"><span>{e(t)}</span><em>{g}</em></label>' for i, t in items) for g, items in CHECK)
+check_html = "".join(f'<h3 class="label" style="margin-top:1.5rem">{g}</h3>' + "".join(f'<label for="{i}"><input type="checkbox" id="{i}"><span>{e(t)}</span><em>{g}</em></label>' for i, t in items) for g, items in CHECK)
 
 SOURCES = [("Oshare Sushi + Bar website (home, about, hours)", "https://osharesushi.com/"), ("Oshare menu on osharesushi.com", "https://osharesushi.com/menu"),
            ("Toast online ordering for Oshare", "https://toast.app/r/osharesushibar/order"), ("OpenTable listing", "https://www.opentable.com/r/oshare-sushi-and-bar-lowell"),
@@ -227,7 +227,7 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="word">{chead("word", "The word <i>oshare</i>")}
   <div class="g2" style="align-items:center">
-    <p class="big-statement">おしゃれ <span style="font-size:.6em;color:var(--ink-2)">oshare</span><br>stylish, fashionable, <em>dressed up.</em></p>
+    <p class="big-statement"><span lang="ja">おしゃれ</span> <span style="font-size:.6em;color:var(--ink-2)">oshare</span><br>stylish, fashionable, <em>dressed up.</em></p>
     <div class="prose"><p>In everyday Japanese, <i>oshare</i> describes someone who dresses well or a place with good taste. It is usually written in kana. {V}</p><p>We use the idea, not the story. "Dressed-up sushi" in the homepage line is a nod to the meaning that works even if nobody knows the word. We won't present it as the origin of the name until the owners tell us why they chose it. {C("Naming intent")}</p><p class="muted" style="font-size:var(--fs-sm)">The kana appears here, in this book, only. The brief asks for no decorative Japanese characters on the site, and we agree.</p></div>
   </div>
 </section>
@@ -276,17 +276,17 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="mission">{chead("mission", "Mission &amp; vision")}
   <div class="g2">
-    <div class="rule-top stack"><h4>Mission</h4><p class="big-statement" style="font-size:clamp(1.4rem,1rem + 1.4vw,2rem)">Make any night in Lowell feel a little dressed up, with carefully made sushi, bold kitchen plates and warm service at neighborhood prices.</p>{R}</div>
-    <div class="rule-top stack"><h4>Vision</h4><p class="big-statement" style="font-size:clamp(1.4rem,1rem + 1.4vw,2rem)">The first place Lowell thinks of for sushi, and the place locals bring visitors to show off downtown.</p>{R}</div>
+    <div class="rule-top stack"><h3 class="label">Mission</h3><p class="big-statement" style="font-size:clamp(1.4rem,1rem + 1.4vw,2rem)">Make any night in Lowell feel a little dressed up, with carefully made sushi, bold kitchen plates and warm service at neighborhood prices.</p>{R}</div>
+    <div class="rule-top stack"><h3 class="label">Vision</h3><p class="big-statement" style="font-size:clamp(1.4rem,1rem + 1.4vw,2rem)">The first place Lowell thinks of for sushi, and the place locals bring visitors to show off downtown.</p>{R}</div>
   </div>
 </section>
 
 <section class="ch" id="voice">{chead("voice", "Voice &amp; tone", "Warm, direct and specific, with a little wit. Write like a good server talks you through the menu.")}
   <div class="voice">
-    <div><h4>Say</h4><p class="say">Lobster tail tempura, plum sauce, crispy wontons. $19.</p></div><div><h4>Not</h4><p class="nosay">An unforgettable fusion of flavors that will tantalize your taste buds.</p></div>
-    <div><h4>Say</h4><p class="say">Open until 9 tonight. Pickup in about 40 minutes.</p></div><div><h4>Not</h4><p class="nosay">We look forward to serving you during our operating hours.</p></div>
-    <div><h4>Say</h4><p class="say">Very spicy. The ghost pepper is not a suggestion.</p></div><div><h4>Not</h4><p class="nosay">🔥🔥🔥 FIRE ROLL ALERT 🔥🔥🔥</p></div>
-    <div><h4>Say</h4><p class="say">Call us or walk in. We don't take online reservations.</p></div><div><h4>Not</h4><p class="nosay">Reservations are currently unavailable at this time.</p></div>
+    <div><p class="label">Say</p><p class="say">Lobster tail tempura, plum sauce, crispy wontons. $19.</p></div><div><p class="label">Not</p><p class="nosay">An unforgettable fusion of flavors that will tantalize your taste buds.</p></div>
+    <div><p class="label">Say</p><p class="say">Open until 9 tonight. Pickup in about 40 minutes.</p></div><div><p class="label">Not</p><p class="nosay">We look forward to serving you during our operating hours.</p></div>
+    <div><p class="label">Say</p><p class="say">Very spicy. The ghost pepper is not a suggestion.</p></div><div><p class="label">Not</p><p class="nosay">🔥🔥🔥 FIRE ROLL ALERT 🔥🔥🔥</p></div>
+    <div><p class="label">Say</p><p class="say">Call us or walk in. We don't take online reservations.</p></div><div><p class="label">Not</p><p class="nosay">Reservations are currently unavailable at this time.</p></div>
   </div>
   <div class="g3" style="margin-top:2rem">
     <div class="stack"><h3>Name the food</h3><p class="muted">Ingredients and prices do the persuading. Skip adjectives like "delicious" and "authentic".</p></div>
@@ -304,7 +304,7 @@ page = f"""<title>Oshare Brand Book</title>
     <div class="rule-top stack"><h3>Named for Lowell</h3><p class="muted">The Acre, Red Sox Maki, the Celtic Roll.</p>{V} {C("Stories")}</div>
     <div class="rule-top stack"><h3>Easy to get</h3><p class="muted">Order direct for pickup or delivery. Open Tuesday to Sunday.</p>{V}</div>
   </div>
-  <div class="panel" style="margin-top:2rem"><h4>The short story</h4><p class="big-statement" style="font-size:clamp(1.3rem,1rem + 1vw,1.8rem);max-width:46ch">Oshare is a neighborhood sushi bar on Market Street in downtown Lowell. Chefs Bryan and Son run a sushi counter and a kitchen side by side, so a night here can be nigiri and a Passion Roll or spicy bulgogi bao and Santaka noodles, with a cocktail from the full bar. Everything arrives on blue-and-white porcelain.</p>{R}</div>
+  <div class="panel" style="margin-top:2rem"><h3 class="label">The short story</h3><p class="big-statement" style="font-size:clamp(1.3rem,1rem + 1vw,1.8rem);max-width:46ch">Oshare is a neighborhood sushi bar on Market Street in downtown Lowell. Chefs Bryan and Son run a sushi counter and a kitchen side by side, so a night here can be nigiri and a Passion Roll or spicy bulgogi bao and Santaka noodles, with a cocktail from the full bar. Everything arrives on blue-and-white porcelain.</p>{R}</div>
 </section>
 
 <section class="ch" id="principles">{chead("principles", "Brand principles")}
@@ -335,7 +335,7 @@ page = f"""<title>Oshare Brand Book</title>
       <dl><dt>Brief lane</dt><dd>Modern Neighborhood Hospitality</dd><dt>Source</dt><dd>Lowell National Historical Park's brochure system: black title band, strict grid, numbered stops</dd><dt>Strength</dt><dd>Deeply local; the menu becomes a guide to Oshare</dd><dt>Risk</dt><dd>Reads institutional; warmth depends entirely on photography</dd></dl>
     </div>
     <div class="dir">
-      <div class="dir__art"><div class="artC"><h5>OSHARE</h5><p><b>The Acre, $18</b>Shrimp tempura, lobster mix, mango, plum sauce</p><img src="img/firebender.jpg" alt=""><span class="call" style="right:36cqw;top:44cqw">ghost pepper sate</span><span class="call" style="right:6cqw;top:38cqw">salmon</span></div></div>
+      <div class="dir__art"><div class="artC"><p class="t">OSHARE</p><p><b>The Acre, $18</b>Shrimp tempura, lobster mix, mango, plum sauce</p><img src="img/firebender.jpg" alt=""><span class="call" style="right:36cqw;top:44cqw">ghost pepper sate</span><span class="call" style="right:6cqw;top:38cqw">salmon</span></div></div>
       <h3>C · Oshare Magazine</h3>
       <div class="dir__chips"><i style="background:#FFD9C2"></i><i style="background:#1F3F80"></i><i style="background:#E2450A"></i><i style="background:#121212"></i></div>
       <dl><dt>Brief lane</dt><dd>Bold Japanese-Fusion Expression</dd><dt>Source</dt><dd>"Oshare" means stylish: Japanese street-style magazines, cover lines and outfit callouts for each dish</dd><dt>Strength</dt><dd>Loud, fun, very shareable</dd><dt>Risk</dt><dd>Tips into gimmick across a whole site; leans on the name's meaning before the owners confirm it</dd></dl>
@@ -390,8 +390,8 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="type">{chead("type", "Typography", "Two faces from Japanese type foundries, both designed with Latin letters. Japanese menus set English this way, which makes the pairing feel at home without a single decorative character.")}
   <div class="g2">
-    <div class="panel"><h4>Display · Shippori Mincho B1</h4><p class="alphabet">Aa Gg 18</p><p class="muted">Weights 500, 700, 800. The "B1" cut has softened, ink-pooled corners, like cobalt brushed onto glaze. Headlines, dish names, prices.</p></div>
-    <div class="panel"><h4>Text · Zen Kaku Gothic New</h4><p class="alphabet" style="font-family:var(--sans);font-weight:700">Aa Gg 18</p><p class="muted">Weights 400, 500, 700. A calm gothic for menus, descriptions and buttons. Both faces are free on Google Fonts.</p></div>
+    <div class="panel"><h3 class="label">Display · Shippori Mincho B1</h3><p class="alphabet">Aa Gg 18</p><p class="muted">Weights 500, 700, 800. The "B1" cut has softened, ink-pooled corners, like cobalt brushed onto glaze. Headlines, dish names, prices.</p></div>
+    <div class="panel"><h3 class="label">Text · Zen Kaku Gothic New</h3><p class="alphabet" style="font-family:var(--sans);font-weight:700">Aa Gg 18</p><p class="muted">Weights 400, 500, 700. A calm gothic for menus, descriptions and buttons. Both faces are free on Google Fonts.</p></div>
   </div>
   <div style="margin-top:2rem">
     <div class="tspec"><small>Hero · Mincho 800<br>40–80 px · -0.03em</small><p style="font-family:var(--display);font-weight:800;font-size:var(--fs-hero);line-height:1;letter-spacing:-.03em">Dressed-up sushi</p></div>
@@ -483,8 +483,8 @@ page = f"""<title>Oshare Brand Book</title>
 <section class="ch" id="social">{chead("social", "Social", "Three templates. Real photos, a cobalt band, one orange note.")}
   <div class="g3" style="align-items:start">
     <div><div class="ig"><img src="img/lobster.jpg" alt="Instagram post template with Lobster Rangoon Maki"><span class="rimline" style="bottom:19cqw"></span><div class="bar"><b>Lobster Rangoon</b><span>$19</span></div></div><p class="mock-cap">Dish post · 1080 × 1080</p></div>
-    <div><div class="ig ig--type"><span class="enso ring"></span><h5>The Acre</h5><p>Shrimp tempura, lobster mix, avocado, mango, shrimp, plum sauce, sriracha, fried shallots.</p><span class="p">$18</span></div><p class="mock-cap">Type post · named rolls, specials</p></div>
-    <div style="max-width:300px"><div class="ig ig--story"><div class="top"><h5>Open tonight until 9</h5><p>Tuesday to Sunday on Market Street. Order pickup from the link.</p></div><img src="img/tray.jpg" alt="Story template with Nigiri Deluxe"><span class="cta">Order pickup</span></div><p class="mock-cap">Story · 1080 × 1920</p></div>
+    <div><div class="ig ig--type"><span class="enso ring"></span><p class="t">The Acre</p><p>Shrimp tempura, lobster mix, avocado, mango, shrimp, plum sauce, sriracha, fried shallots.</p><span class="p">$18</span></div><p class="mock-cap">Type post · named rolls, specials</p></div>
+    <div style="max-width:300px"><div class="ig ig--story"><div class="top"><p class="t">Open tonight until 9</p><p>Tuesday to Sunday on Market Street. Order pickup from the link.</p></div><img src="img/tray.jpg" alt="Story template with Nigiri Deluxe"><span class="cta">Order pickup</span></div><p class="mock-cap">Story · 1080 × 1920</p></div>
   </div>
   <p class="muted" style="margin-top:1.5rem">Captions follow the voice in 2.6. Hashtag: #OshareSushiBar. Link in bio goes to the Toast order page, not a delivery app. {C("Handles")}</p>
 </section>
@@ -493,8 +493,8 @@ page = f"""<title>Oshare Brand Book</title>
   <div class="desk"><div class="menucard">
     <div class="menucard__cover">{LOCKUP("lockup--white")}<p>350 Market Street · Lowell, MA<br>Sushi bar · Kitchen · Full bar</p></div>
     <div class="menucard__in">
-      <div><h6>Signature Maki</h6><div class="r"></div><dl>{''.join(f"<div><dt><span>{e(n)}</span><span>{m(item(n)['p'])}</span></dt><dd>{e(item(n)['d'])}</dd></div>" for n in ["The Acre", "Passion Roll", "Lobster Rangoon Maki", "Red Sox Maki", "Celtic Roll Maki"])}</dl></div>
-      <div><h6>From the Kitchen</h6><div class="r"></div><dl>{''.join(f"<div><dt><span>{e(n)}</span><span>{m(item(n)['p'])}</span></dt><dd>{e(item(n)['d'])}</dd></div>" for n in ["Santaka Beef Noodle", "Fried Chicken Bao", "Spicy Beef Bao", "Chicken Karaage", "Katsu Udon"])}</dl></div>
+      <div><p class="h">Signature Maki</p><div class="r"></div><dl>{''.join(f"<div><dt><span>{e(n)}</span><span>{m(item(n)['p'])}</span></dt><dd>{e(item(n)['d'])}</dd></div>" for n in ["The Acre", "Passion Roll", "Lobster Rangoon Maki", "Red Sox Maki", "Celtic Roll Maki"])}</dl></div>
+      <div><p class="h">From the Kitchen</p><div class="r"></div><dl>{''.join(f"<div><dt><span>{e(n)}</span><span>{m(item(n)['p'])}</span></dt><dd>{e(item(n)['d'])}</dd></div>" for n in ["Santaka Beef Noodle", "Fried Chicken Bao", "Spicy Beef Bao", "Chicken Karaage", "Katsu Udon"])}</dl></div>
     </div>
   </div></div>
   <p class="muted" style="margin-top:1rem">11 × 17 in folded to 8.5 × 11. Uncoated bright white stock, cobalt as a spot color (nearest Pantone around 7687 C, match on press). {C("Print proof")}</p>
@@ -556,8 +556,8 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="tokens">{chead("tokens", "Design tokens", "Copy straight into the theme. These are the values the prototype runs on.")}
   <div class="g2">
-    <div><h4>CSS custom properties</h4><div class="code"><button class="chip" type="button" data-copy-code="code-css">Copy</button><pre id="code-css">{e(css_tokens)}</pre></div></div>
-    <div><h4>WordPress theme.json</h4><div class="code"><button class="chip" type="button" data-copy-code="code-json">Copy</button><pre id="code-json" style="max-height:520px">{e(theme_json)}</pre></div></div>
+    <div><h3 class="label" id="code-css-h">CSS custom properties</h3><div class="code"><button class="chip" type="button" data-copy-code="code-css">Copy</button><pre id="code-css" tabindex="0" aria-labelledby="code-css-h">{e(css_tokens)}</pre></div></div>
+    <div><h3 class="label" id="code-json-h">WordPress theme.json</h3><div class="code"><button class="chip" type="button" data-copy-code="code-json">Copy</button><pre id="code-json" tabindex="0" aria-labelledby="code-json-h" style="max-height:520px">{e(theme_json)}</pre></div></div>
   </div>
 </section>
 
@@ -593,6 +593,16 @@ page = f"""<title>Oshare Brand Book</title>
 </div>
 <script src="assets/bb.js"></script>
 """
+def _label_regions(html_):
+    out, last = [], "Table"
+    for part in re.split(r'(<h2><span class="n">[^<]*</span>[^<]*</h2>|<div class="tbl-wrap")', html_):
+        m = re.match(r'<h2><span class="n">[^<]*</span>([^<]*)</h2>', part)
+        if m: last = html.unescape(m.group(1)).strip()
+        if part == '<div class="tbl-wrap"':
+            part = f'<div class="tbl-wrap" tabindex="0" role="region" aria-label="{e(last)} table, scrolls sideways"'
+        out.append(part)
+    return "".join(out)
+page = _label_regions(page)
 os.makedirs(os.path.join(ROOT, "brand-book"), exist_ok=True)
 open(os.path.join(ROOT, "brand-book", "index.html"), "w").write(page)
 print("brandbook", len(page))

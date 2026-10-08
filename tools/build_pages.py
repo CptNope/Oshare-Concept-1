@@ -31,13 +31,24 @@ def concept_bar(prefix, current):
             f'{link(prefix + "#design-files", "Design Files", "files")}<a class="ext" href="{REPO}" rel="noopener">GitHub{ARROW}</a></div></div></nav>')
 
 NOINDEX = '<meta name="robots" content="noindex, nofollow">'
+JSFLAG = '<script>document.documentElement.classList.add("js")</script>'
 
 def private_preview(s):
     """Keep the concept out of search: no canonical pointing at the real osharesushi.com, and noindex on every page."""
     s = re.sub(r'<link rel="canonical"[^>]*>\n?', '', s)
     if NOINDEX not in s:
         s = re.sub(r'(<meta name="viewport"[^>]*>)', r'\1\n' + NOINDEX, s, count=1)
+    if JSFLAG not in s:
+        s = s.replace(NOINDEX, NOINDEX + "\n" + JSFLAG, 1)
     return s
+
+NEWTAB = '<span class="sr-only"> (opens in a new tab)</span>'
+def announce_new_tabs(s):
+    """Screen readers hear when a link leaves for Toast, Google Maps or GitHub."""
+    def fix(m):
+        tag, inner = m.group(1), m.group(2)
+        return m.group(0) if NEWTAB in inner else f"{tag}{inner}{NEWTAB}</a>"
+    return re.sub(r'(<a\b[^>]*target="_blank"[^>]*>)(.*?)</a>', fix, s, flags=re.S)
 
 import hashlib
 def _ver(name):
@@ -75,14 +86,14 @@ for f in sorted(os.listdir(site_dir)):
     p = os.path.join(site_dir, f); s = open(p).read()
     s = rewrite_paths(s)
     s = inject_bar(s, concept_bar("../", "site"))
-    open(p, "w").write(bust(private_preview(s)))
+    open(p, "w").write(bust(private_preview(announce_new_tabs(s))))
 
 # ---- brand book: content-only page -> full document
 bp = os.path.join(ROOT, "brand-book", "index.html")
 s = rewrite_paths(open(bp).read())
 s = s.replace('href="../site/" target="_blank" rel="noopener"', 'href="../site/"')
 s = inject_bar(s, concept_bar("../", "book"))
-open(bp, "w").write(bust(private_preview(shell(s, "Oshare Brand Book", ""))))
+open(bp, "w").write(bust(private_preview(announce_new_tabs(shell(s, "Oshare Brand Book", "")))))
 
 # ---- hub
 FILES = [

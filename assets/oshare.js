@@ -3,6 +3,11 @@
   "use strict";
   var doc = document.documentElement;
 
+  /* ---------- images that fail to load fall back to the brand ground instead of a broken icon ---------- */
+  var failed = function (img) { img.classList.add("img-failed"); };
+  document.addEventListener("error", function (e) { if (e.target && e.target.tagName === "IMG") failed(e.target); }, true);
+  Array.prototype.forEach.call(document.images, function (img) { if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) failed(img); });
+
   /* ---------- hours (restaurant's own site, 2026-10-08). 0 = Sunday ---------- */
   var HOURS = [[690, 1260], null, [960, 1260], [960, 1260], [960, 1260], [690, 1320], [690, 1320]];
   var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -93,18 +98,20 @@
 
     var q = document.getElementById("menu-search"), noRaw = document.getElementById("f-noraw"), hot = document.getElementById("f-hot");
     var items = document.querySelectorAll(".mitem"), live = document.getElementById("menu-live");
+    var fold = function (t) { t = String(t || "").toLowerCase(); try { t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {} return t.replace(/\s+/g, " ").trim(); };
+    items.forEach(function (it) { it._t = fold(it.dataset.text); });
     function apply() {
-      var term = (q && q.value || "").trim().toLowerCase(), shown = 0;
+      var words = fold(q && q.value).split(" ").filter(Boolean), shown = 0;
       var nr = noRaw && noRaw.getAttribute("aria-pressed") === "true", h = hot && hot.getAttribute("aria-pressed") === "true";
+      var filtering = words.length || nr || h;
       items.forEach(function (it) {
-        var ok = (!term || it.dataset.text.indexOf(term) > -1) && (!nr || it.dataset.raw !== "true") && (!h || Number(it.dataset.hot) > 0);
+        var ok = words.every(function (w) { return it._t.indexOf(w) > -1; }) && (!nr || it.dataset.raw !== "true") && (!h || Number(it.dataset.hot) > 0);
         it.hidden = !ok; if (ok) shown++;
       });
       document.querySelectorAll(".mcat").forEach(function (sec) {
-        var any = sec.querySelector(".mitem:not([hidden])");
-        sec.hidden = !any && (term || nr || h) ? true : false;
+        sec.hidden = !!filtering && !sec.querySelector(".mitem:not([hidden])");
       });
-      if (live) live.textContent = (term || nr || h) ? shown + " dishes match" : "";
+      if (live) live.textContent = !filtering ? "" : shown === 0 ? "No matches" : shown === 1 ? "1 dish" : shown + " dishes";
       var empty = document.getElementById("menu-empty"); if (empty) empty.hidden = shown > 0;
     }
     [noRaw, hot].forEach(function (b) { if (b) b.addEventListener("click", function () { b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); apply(); }); });
@@ -124,16 +131,18 @@
 
   /* ---------- gallery lightbox ---------- */
   var dlg = document.querySelector("dialog.lightbox");
-  if (dlg && dlg.showModal) {
-    var tiles = Array.prototype.slice.call(document.querySelectorAll(".gallery button")), idx = 0;
-    var im = dlg.querySelector("img"), cap = dlg.querySelector("figcaption span"), count = dlg.querySelector("[data-count]");
+  if (dlg && typeof dlg.showModal === "function") {
+    var tiles = Array.prototype.slice.call(document.querySelectorAll(".gallery a")), idx = 0;
+    var holder = dlg.querySelector(".lightbox__img"), cap = dlg.querySelector("figcaption span"), count = dlg.querySelector("[data-count]"), im = null;
     function show(i) {
       idx = (i + tiles.length) % tiles.length;
-      var t = tiles[idx], src = t.querySelector("img");
-      im.src = src.currentSrc || src.src; im.alt = src.alt; cap.textContent = t.dataset.caption || src.alt;
+      var t = tiles[idx];
+      if (!im) { im = document.createElement("img"); im.decoding = "async"; holder.appendChild(im); }
+      im.src = t.getAttribute("href"); im.alt = t.dataset.caption || "";
+      cap.textContent = t.dataset.caption || "";
       count.textContent = (idx + 1) + " / " + tiles.length;
     }
-    tiles.forEach(function (t, i) { t.addEventListener("click", function () { show(i); dlg.showModal(); }); });
+    tiles.forEach(function (t, i) { t.addEventListener("click", function (ev) { if (ev.metaKey || ev.ctrlKey || ev.shiftKey) return; ev.preventDefault(); show(i); dlg.showModal(); }); });
     dlg.querySelector("[data-prev]").addEventListener("click", function () { show(idx - 1); });
     dlg.querySelector("[data-next]").addEventListener("click", function () { show(idx + 1); });
     dlg.querySelector("[data-close]").addEventListener("click", function () { dlg.close(); });
@@ -144,9 +153,16 @@
 
   /* ---------- copy phone (tel: links are unreliable inside an artifact frame) ---------- */
   document.querySelectorAll("[data-copy]").forEach(function (b) {
+    var label = b.textContent;
+    var flash = function (t) { b.textContent = t; setTimeout(function () { b.textContent = label; }, 1600); };
+    var select = function () {
+      var target = b.previousElementSibling; if (!target) return flash("Copy failed");
+      var r = document.createRange(); r.selectNodeContents(target); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      flash("Selected");
+    };
     b.addEventListener("click", function () {
-      var v = b.dataset.copy, done = function () { var o = b.textContent; b.textContent = "Copied"; setTimeout(function () { b.textContent = o; }, 1400); };
-      if (navigator.clipboard) navigator.clipboard.writeText(v).then(done, function () {});
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(b.dataset.copy).then(function () { flash("Copied"); }, select);
+      else select();
     });
   });
 })();
