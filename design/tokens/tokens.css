@@ -3,7 +3,10 @@
   --glaze: #F3F5F9;   --glaze-2: #E9EDF4;  --wash: #D9E3F2;
   --ink: #0B1A36;     --ink-2: #3E4D6B;
   --cobalt: #1F3F80;  --cobalt-2: #2E58A6; --on-cobalt: #F3F5F9; --on-cobalt-2: #B9C9EA;
-  --enso: #F25A0A;    --enso-ink: #B5420A; --enso-hi: #FF8540; --on-enso: #0B1A36;
+  --enso: #F25A0A;    --enso-ink: #A83D08; --enso-hi: #FF9A5C; --on-enso: #0B1A36;
+  --cobalt-ink: #1F3F80; /* cobalt as text, rules and borders; #8FAEEA in dark mode */
+  --band: #0B1A36;       /* deep band; #050B1A in dark mode */
+  --ok: #17703D;         /* positive state; #6FD39B in dark mode */
   /* type */
   --display: "Shippori Mincho B1", "Yu Mincho", Georgia, serif;
   --sans: "Zen Kaku Gothic New", "Yu Gothic", system-ui, sans-serif;

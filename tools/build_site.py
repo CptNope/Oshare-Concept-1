@@ -245,7 +245,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
     </div>
   </section>
 
-  <section class="sec sec--tight field" aria-labelledby="bar-h" style="background-color:var(--ink)">
+  <section class="sec sec--tight field field--band" aria-labelledby="bar-h">
     <div class="wrap barstack" style="display:grid;gap:2rem;align-items:center">
       <p aria-hidden="true" style="font-family:var(--display);font-weight:800;font-size:clamp(5rem,3rem + 10vw,12rem);line-height:.85;letter-spacing:-.04em;color:var(--on-cobalt)"><span style="color:var(--enso)">+</span>BAR</p>
       <div style="display:grid;gap:1.25rem">
@@ -383,7 +383,7 @@ story = head("Our Story | Oshare Sushi + Bar, Lowell MA", "Chefs Bryan and Son b
       </div>
     </div>
   </section>
-  <section class="sec field note-block" aria-labelledby="gaps-h" style="background-color:var(--ink)">
+  <section class="sec field field--band note-block" aria-labelledby="gaps-h">
     <div class="wrap">
       <div class="sec-head"><h2 id="gaps-h">Still to write, together.</h2><p>These parts of the story belong to the owners. The layout is ready for them. <span class="note">Pitch note: visible in prototype only</span></p></div>
       <div class="gaps">

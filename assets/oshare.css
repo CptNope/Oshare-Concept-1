@@ -13,8 +13,11 @@
   --on-cobalt: #F3F5F9;
   --on-cobalt-2: #B9C9EA;  /* secondary text on cobalt (6:1) */
   --enso: #F25A0A;         /* the brush ring + primary action fill */
-  --enso-ink: #B5420A;     /* orange as text on glaze (5.1:1) */
-  --enso-hi: #FF8540;      /* orange as text on cobalt (4.2:1, large text) */
+  --enso-ink: #A83D08;     /* orange as text on glaze (5.8:1), panels (5.4:1), wash (4.9:1) */
+  --enso-hi: #FF9A5C;      /* orange as text on cobalt (4.8:1) */
+  --cobalt-ink: #1F3F80;   /* cobalt as text, rules and borders on the page ground */
+  --band: #0B1A36;         /* the deep band behind +BAR; stays dark in both themes */
+  --ok: #17703D;           /* positive state text */
   --on-enso: #0B1A36;
   --line: rgba(31, 63, 128, .22);
   --shadow: 0 18px 40px -22px rgba(11, 26, 54, .45);
@@ -42,14 +45,14 @@
   :root:not([data-theme="light"]) {
     --glaze: #0A1630; --glaze-2: #0F1E3E; --ink: #EEF2FA; --ink-2: #AFBEDB;
     --cobalt: #15306A; --cobalt-2: #8FAEEA; --wash: #1B305F; --on-cobalt: #F3F5F9; --on-cobalt-2: #BFD0F0;
-    --enso: #F46A1E; --enso-ink: #FF8A45; --enso-hi: #FF9452; --on-enso: #0B1A36; --line: rgba(143, 174, 234, .25);
+    --enso: #F46A1E; --enso-ink: #FF8A45; --enso-hi: #FF9A5C; --cobalt-ink: #8FAEEA; --band: #050B1A; --ok: #6FD39B; --on-enso: #0B1A36; --line: rgba(143, 174, 234, .25);
     --shadow: 0 18px 40px -20px rgba(0, 0, 0, .7); --field-grain: .05; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --glaze: #0A1630; --glaze-2: #0F1E3E; --ink: #EEF2FA; --ink-2: #AFBEDB;
   --cobalt: #15306A; --cobalt-2: #8FAEEA; --wash: #1B305F; --on-cobalt: #F3F5F9; --on-cobalt-2: #BFD0F0;
-  --enso: #F46A1E; --enso-ink: #FF8A45; --enso-hi: #FF9452; --on-enso: #0B1A36; --line: rgba(143, 174, 234, .25);
+  --enso: #F46A1E; --enso-ink: #FF8A45; --enso-hi: #FF9A5C; --cobalt-ink: #8FAEEA; --band: #050B1A; --ok: #6FD39B; --on-enso: #0B1A36; --line: rgba(143, 174, 234, .25);
   --shadow: 0 18px 40px -20px rgba(0, 0, 0, .7); --field-grain: .05; color-scheme: dark;
 }
 
@@ -76,7 +79,7 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 .tnum { font-variant-numeric: tabular-nums; }
 
 /* ---------- the rim rule: heavy + hairline, like a bowl's painted rim ---------- */
-.rim { border: 0; height: 7px; margin: 0; color: var(--cobalt);
+.rim { border: 0; height: 7px; margin: 0; color: var(--cobalt-ink);
   background: linear-gradient(currentColor, currentColor) top/100% 3px no-repeat, linear-gradient(currentColor, currentColor) bottom/100% 1px no-repeat; }
 .on-cobalt .rim, .field .rim { color: var(--on-cobalt-2); }
 
@@ -131,7 +134,7 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 .hdr__act { display: flex; align-items: center; gap: var(--s4); }
 .status { display: inline-flex; align-items: center; gap: .5em; font-size: var(--fs-sm); color: var(--ink-2); white-space: nowrap; }
 .status__dot { width: .62em; height: .62em; border-radius: 50%; background: var(--ink-2); box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent); }
-.status[data-open="true"] .status__dot { background: #1E8A4C; color: #1E8A4C; }
+.status[data-open="true"] .status__dot { background: var(--ok); color: var(--ok); }
 .status[data-open="false"] .status__dot { background: var(--enso-ink); color: var(--enso-ink); }
 .status b { color: var(--ink); font-weight: 700; }
 .menu-btn { display: none; }
@@ -159,6 +162,7 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 
 /* ---------- cobalt field ---------- */
 .field { background-color: var(--cobalt); color: var(--on-cobalt); position: relative; isolation: isolate; }
+.field--band { background-color: var(--band); }
 .field::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: var(--field-grain); pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.35'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .field ::selection { background: var(--on-cobalt); color: var(--cobalt); }
@@ -269,10 +273,10 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 .barband .btn--ghost { --t: #F3F5F9; }
 
 /* ratings */
-.ratings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--cobalt); }
+.ratings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--cobalt-ink); }
 .rating { padding: var(--s5) var(--s5) var(--s5) 0; display: grid; gap: var(--s2); border-bottom: 1px solid var(--line); }
 .rating + .rating { padding-left: var(--s5); border-left: 1px solid var(--line); }
-.rating__n { font-family: var(--display); font-size: clamp(2.6rem, 2rem + 2vw, 3.8rem); font-weight: 800; line-height: 1; color: var(--cobalt); }
+.rating__n { font-family: var(--display); font-size: clamp(2.6rem, 2rem + 2vw, 3.8rem); font-weight: 800; line-height: 1; color: var(--cobalt-ink); }
 .rating__n small { font-size: .4em; color: var(--ink-2); font-weight: 500; }
 .rating__src { font-size: var(--fs-sm); color: var(--ink-2); }
 @media (max-width: 720px) { .ratings { grid-template-columns: 1fr; } .rating + .rating { padding-left: 0; border-left: 0; } }

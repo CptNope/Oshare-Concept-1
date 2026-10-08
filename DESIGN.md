@@ -12,8 +12,11 @@ colors:
   on-cobalt: "#F3F5F9"
   on-cobalt-secondary: "#B9C9EA"
   enso: "#F25A0A"
-  enso-ink: "#B5420A"
-  enso-light: "#FF8540"
+  enso-ink: "#A83D08"
+  enso-light: "#FF9A5C"
+  cobalt-ink: "#1F3F80"
+  band: "#0B1A36"
+  ok: "#17703D"
   night-ground: "#0A1630"
   night-cobalt: "#15306A"
 typography:
@@ -107,10 +110,12 @@ The build is a five-page Persuade surface (site) plus a Read surface (brand book
 
 - **Glaze `#F3F5F9`** — page ground, slightly cool so marble photography reads warm. ~58% of a view.
 - **Cobalt `#1F3F80`** — sampled from the deepest strokes on the bowls. Full-bleed fields (hero copy, Lowell rolls, kitchen counter, visit, footer) with a faint fractal grain. ~30%.
-- **Ensō Orange `#F25A0A`** — the brush ring and the primary button fill. Under 5% of a view. Text on it is always Ink (5.1:1).
+- **Ensō Orange `#F25A0A`** — the brush ring and the primary button fill. Under 5% of a view. Text on it is always Ink (5.8:1).
 - **Ink `#0B1A36`** — text; never pure black. Secondary text `#3E4D6B` on glaze (6.3:1), `#B9C9EA` on cobalt (6:1).
-- Orange as text: `#B5420A` on glaze (5.1:1); `#FF8540` for large words on cobalt (4.2:1). Never `#F25A0A` as small text.
-- Night palette (prefers-color-scheme dark and `[data-theme=dark]`): ground `#0A1630`, cobalt fields `#15306A`, ink becomes `#EEF2FA`, same roles.
+- Orange as text: `#A83D08` on glaze (5.8:1); `#FF9A5C` on cobalt (4.8:1). Never `#F25A0A` as small text.
+- **Cobalt Ink `#1F3F80`** — cobalt used as text, rules and borders on the ground. It lightens to `#8FAEEA` in dark mode; never use the `cobalt` field color for foreground.
+- **Band `#0B1A36`** — the deep band behind +Bar and the story gaps. It stays dark in both themes (`#050B1A` at night); never build a dark band from the `ink` text token, which flips light in dark mode.
+- Night palette (prefers-color-scheme dark and `[data-theme=dark]`): ground `#0A1630`, cobalt fields `#15306A`, ink becomes `#EEF2FA`, cobalt ink `#8FAEEA`, band `#050B1A`, ok `#6FD39B`. Audit both themes with `tools/contrast_audit.js`.
 
 **The One Hot Note rule:** orange appears once per view — the ring, the order button, or one word. Cobalt carries the color load.
 

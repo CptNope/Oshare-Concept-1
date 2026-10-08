@@ -38,12 +38,12 @@
         {
           "slug": "enso-ink",
           "name": "Orange Ink",
-          "color": "#B5420A"
+          "color": "#A83D08"
         },
         {
           "slug": "enso-light",
           "name": "Orange Light",
-          "color": "#FF8540"
+          "color": "#FF9A5C"
         }
       ]
     },

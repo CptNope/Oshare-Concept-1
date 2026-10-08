@@ -30,15 +30,15 @@ COLORS = [
     ("Ink", "#0B1A36", "Blue-black for text. Never pure black.", "#F3F5F9"),
     ("Wash", "#D9E3F2", "Diluted cobalt for quiet fills and tables.", "#0B1A36"),
     ("Cobalt Line", "#2E58A6", "Links, icons and hairlines on glaze.", "#F3F5F9"),
-    ("Orange Ink", "#B5420A", "Orange when it has to be small text on glaze.", "#F3F5F9"),
-    ("Orange Light", "#FF8540", "Orange when it is large text on cobalt.", "#0B1A36"),
+    ("Orange Ink", "#A83D08", "Orange when it has to be small text on glaze.", "#F3F5F9"),
+    ("Orange Light", "#FF9A5C", "Orange as text on cobalt, at any size.", "#0B1A36"),
 ]
 def rgb(h): return ", ".join(str(int(h[i:i + 2], 16)) for i in (1, 3, 5))
 swatches = "".join(f'''<div class="swatch"><div class="swatch__chip" style="background:{h};color:{fg};{'box-shadow:inset 0 0 0 1px var(--line)' if h=='#F3F5F9' else ''}">{n}</div><div class="swatch__meta"><b>{h}</b><span>RGB {rgb(h)}</span><span>{d}</span></div></div>''' for n, h, d, fg in COLORS)
 PAIRS = [("Ink on Glaze", "#0B1A36", "#F3F5F9", "Body text"), ("Glaze on Cobalt", "#F3F5F9", "#1F3F80", "Text on cobalt fields"),
          ("Cobalt on Glaze", "#1F3F80", "#F3F5F9", "Headings, data"), ("Cobalt Line on Glaze", "#2E58A6", "#F3F5F9", "Links, icons"),
-         ("Ink on Ensō Orange", "#0B1A36", "#F25A0A", "Primary button label"), ("Orange Ink on Glaze", "#B5420A", "#F3F5F9", "Small orange text"),
-         ("Orange Light on Cobalt", "#FF8540", "#1F3F80", "Large orange words on cobalt"), ("Ensō Orange on Cobalt", "#F25A0A", "#1F3F80", "The ring on cobalt (graphic)"),
+         ("Ink on Ensō Orange", "#0B1A36", "#F25A0A", "Primary button label"), ("Orange Ink on Glaze", "#A83D08", "#F3F5F9", "Small orange text"),
+         ("Orange Light on Cobalt", "#FF9A5C", "#1F3F80", "Orange words on cobalt"), ("Glaze on Band", "#F3F5F9", "#0B1A36", "+Bar band text (band stays dark in both themes)"), ("Ensō Orange on Cobalt", "#F25A0A", "#1F3F80", "The ring on cobalt (graphic)"),
          ("White on Ensō Orange", "#FFFFFF", "#F25A0A", "Avoid for text")]
 def verdict(r):
     if r >= 7: return '<span class="pass">AAA</span>'
@@ -75,7 +75,10 @@ css_tokens = """:root {
   --glaze: #F3F5F9;   --glaze-2: #E9EDF4;  --wash: #D9E3F2;
   --ink: #0B1A36;     --ink-2: #3E4D6B;
   --cobalt: #1F3F80;  --cobalt-2: #2E58A6; --on-cobalt: #F3F5F9; --on-cobalt-2: #B9C9EA;
-  --enso: #F25A0A;    --enso-ink: #B5420A; --enso-hi: #FF8540; --on-enso: #0B1A36;
+  --enso: #F25A0A;    --enso-ink: #A83D08; --enso-hi: #FF9A5C; --on-enso: #0B1A36;
+  --cobalt-ink: #1F3F80; /* cobalt as text, rules and borders; #8FAEEA in dark mode */
+  --band: #0B1A36;       /* deep band; #050B1A in dark mode */
+  --ok: #17703D;         /* positive state; #6FD39B in dark mode */
   /* type */
   --display: "Shippori Mincho B1", "Yu Mincho", Georgia, serif;
   --sans: "Zen Kaku Gothic New", "Yu Gothic", system-ui, sans-serif;
@@ -93,7 +96,7 @@ theme_json = json.dumps({
     "settings": {
         "color": {"defaultPalette": False, "palette": [{"slug": s, "name": n, "color": c} for s, n, c in [
             ("glaze", "Glaze", "#F3F5F9"), ("ink", "Ink", "#0B1A36"), ("cobalt", "Cobalt", "#1F3F80"), ("cobalt-line", "Cobalt Line", "#2E58A6"),
-            ("wash", "Wash", "#D9E3F2"), ("enso", "Ensō Orange", "#F25A0A"), ("enso-ink", "Orange Ink", "#B5420A"), ("enso-light", "Orange Light", "#FF8540")]]},
+            ("wash", "Wash", "#D9E3F2"), ("enso", "Ensō Orange", "#F25A0A"), ("enso-ink", "Orange Ink", "#A83D08"), ("enso-light", "Orange Light", "#FF9A5C")]]},
         "typography": {"fluid": True, "fontFamilies": [
             {"slug": "display", "name": "Shippori Mincho B1", "fontFamily": "\"Shippori Mincho B1\", Georgia, serif"},
             {"slug": "sans", "name": "Zen Kaku Gothic New", "fontFamily": "\"Zen Kaku Gothic New\", system-ui, sans-serif"}],
@@ -382,7 +385,7 @@ page = f"""<title>Oshare Brand Book</title>
   <p class="muted" style="margin-top:.75rem">Cobalt owns whole sections, never thin accents. Orange stays under 5% of any view.</p>
   <h3 style="margin:2.5rem 0 .5rem">Accessible pairs</h3><p class="muted" style="margin-bottom:1rem">Contrast ratios computed against WCAG 2.2. AA needs 4.5:1 for text, 3:1 for large text and graphics.</p>
   <div>{pairs}</div>
-  <p class="muted" style="margin-top:1rem;font-size:var(--fs-sm)">A night palette (deep cobalt ground, glaze text) ships for visitors whose devices are set to dark mode. Same roles, same ratios.</p>
+  <p class="muted" style="margin-top:1rem;font-size:var(--fs-sm)">A night palette ships for visitors whose devices are set to dark mode: ground #0A1630, cobalt fields #15306A, text #EEF2FA, and cobalt used as text or rules lightens to #8FAEEA. The deep band behind +Bar stays dark in both themes. Every text pair is checked in both themes.</p>
 </section>
 
 <section class="ch" id="type">{chead("type", "Typography", "Two faces from Japanese type foundries, both designed with Latin letters. Japanese menus set English this way, which makes the pairing feel at home without a single decorative character.")}
