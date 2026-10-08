@@ -35,7 +35,7 @@
   var bar = document.querySelector(".progress i"), count = document.querySelector("[data-check-count]");
   function sync() {
     var n = boxes.filter(function (b) { return b.checked; }).length;
-    if (bar) bar.style.width = (100 * n / boxes.length) + "%";
+    if (bar) bar.style.transform = "scaleX(" + (n / boxes.length) + ")";
     if (count) count.textContent = n + " of " + boxes.length + " confirmed";
   }
   boxes.forEach(function (b) {

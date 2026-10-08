@@ -19,8 +19,9 @@ Every page shares a top bar for moving between the hub, the brand book and the p
 index.html            concept hub
 brand-book/           brand book (research, strategy, identity, applications, build plan)
 site/                 five-page website prototype
-assets/               shared CSS, JS and vector logo files
-img/                  the restaurant's published photography (resized)
+assets/               shared CSS, JS, runtime logo files and self-hosted fonts (assets/fonts, SIL OFL)
+img/                  the restaurant's published photography (JPEG fallbacks)
+img/w/                AVIF + WebP copies at 240–1600px wide, picked per screen by srcset
 PRODUCT.md            product truth: users, positioning, verified facts, open questions
 DESIGN.md             the Blue & White design system (tokens + rules)
 .impeccable/          design-tool context (config, design.json sidecar, direction contract)
@@ -33,6 +34,7 @@ design/
   data/menu.json          124 menu items, prices and Toast item links (captured Oct 8, 2026)
 tools/
   build_pages.py          regenerates index.html, brand-book/ and site/
+  build_assets.py         image sizes (AVIF/WebP) and compact runtime SVGs; run by build_pages.py
   build_site.py           site prototype templates
   build_brandbook.py      brand book template
   shoot.js                Playwright screenshot helper used for visual QA
@@ -48,6 +50,8 @@ python3 tools/build_pages.py
 
 Edit `design/data/menu.json` to change dishes or prices, then rebuild.
 
+New or replaced photos go in `img/` as JPEG. The rebuild encodes their AVIF and WebP sizes into `img/w/`, which needs Pillow 11.3 or newer (`pip install -U pillow`). Logo masters live in `design/logo/`; the copies in `assets/` are generated from them with rounded coordinates.
+
 ## GitHub Pages
 
 Settings → Pages → **Deploy from a branch** → `main` / `(root)`. The `.nojekyll` file makes Pages serve every file as-is.
@@ -58,4 +62,5 @@ Settings → Pages → **Deploy from a branch** → `main` / `(root)`. The `.noj
 - Menu, prices and hours were captured from the restaurant's own site and Toast ordering page on October 8, 2026.
 - Orange dashed "pitch notes" on the prototype mark facts the owners still need to confirm. Hide them from the prototype footer for a clean presentation.
 - Ordering buttons link to the restaurant's live Toast ordering page. Nothing on this site takes orders or payments.
+- Performance: photos are served as AVIF/WebP at the width each layout slot needs, fonts are self-hosted (no Google Fonts requests), and only the headline face is preloaded.
 - Every page carries `noindex, nofollow` and no canonical link, so search engines leave this concept alone. `tools/build_pages.py` adds both on every rebuild; remove `private_preview()` there if the concept ever should be indexed.

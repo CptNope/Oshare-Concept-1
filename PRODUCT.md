@@ -51,7 +51,7 @@ The only sushi bar in Lowell whose menu speaks Lowell. Verified menu items name 
 
 ## Evidence on Hand
 
-- 4 site photos + 15 menu-item photos on Toast's CDN (signed URLs captured in `assets/menu-data.js` (OSHARE_PHOTOS); local copies in `img/`). Usage rights: the restaurant's own published images; must confirm license with owner before production use.
+- 4 site photos + 15 menu-item photos on Toast's CDN (local copies in `img/`, with AVIF/WebP sizes in `img/w/`; the signed CDN URLs expire and are not kept). Usage rights: the restaurant's own published images; must confirm license with owner before production use.
 - Ratings (aggregates only, Oct 2026): Restaurantji 4.8 (68), OpenTable 4.8 (10), Uber Eats 4.9 (27). Review themes: fish quality, presentation, friendly staff, cocktails, relaxed room.
 - **No** interior/bar/staff/chef photography, no testimonials with permission, no press coverage found. Never fabricate any of these.
 

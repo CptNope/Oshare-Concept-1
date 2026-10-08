@@ -15,10 +15,9 @@ REPO = "https://github.com/CptNope/Oshare-Concept-1"
 e = html.escape
 
 env = dict(os.environ, SITE_URL="../site/")
-for script in ("build_site.py", "build_brandbook.py"):
+for script in ("build_assets.py", "build_site.py", "build_brandbook.py"):
     subprocess.run([sys.executable, os.path.join(ROOT, "tools", script)], check=True, env=env, stdout=subprocess.DEVNULL)
 
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">'
 ARROW = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>'
 
 def concept_bar(prefix, current):
@@ -59,6 +58,44 @@ def bust(s):
     """Version-stamp CSS/JS links so browsers pick up changes right after a deploy."""
     return re.sub(r'((?:href|src)="(?:\.\./)?assets/)([\w.-]+\.(?:css|js))"', lambda m: f'{m.group(1)}{m.group(2)}?v={_ver(m.group(2))}"', s)
 
+# ---- performance: self-hosted fonts + responsive images
+GOOGLE_FONTS = re.compile(r'<link rel="(?:preconnect|stylesheet)" href="https://fonts\.(?:googleapis|gstatic)\.com[^"]*"[^>]*>\s*')
+PRELOAD = ("shippori-mincho-b1-latin-800-normal.woff2",)  # the h1 face; body text swaps in without moving the layout
+
+def self_host_fonts(s):
+    """Fonts come from assets/fonts/ (declared in oshare.css); the h1 face is preloaded.
+    Also drops any Google Fonts link a template might bring back."""
+    s = GOOGLE_FONTS.sub("", s)
+    def pre(m):
+        links = "".join(f'<link rel="preload" href="{m.group(2)}fonts/{f}" as="font" type="font/woff2" crossorigin>\n' for f in PRELOAD)
+        return links + m.group(1)
+    return re.sub(r'(<link rel="stylesheet" href="((?:\.\./)?assets/)oshare\.css)', pre, s, count=1)
+
+MANIFEST = json.load(open(os.path.join(ROOT, "img", "w", "manifest.json")))
+IMG = re.compile(r'<img\b[^>]*?\bsrc="((?:\.\./)?)img/([\w-]+)\.jpg"[^>]*>')
+
+def responsive(s):
+    """Every photo becomes <picture> with AVIF and WebP srcsets; the JPEG stays as the fallback.
+    The builders mark each <img> with a sizes hint for its layout slot (default 100vw)."""
+    def fix(m):
+        tag, pre, name = m.group(0), m.group(1), m.group(2)
+        info = MANIFEST.get(name)
+        if not info or "<picture" in s[max(0, m.start() - 9):m.start()]: return tag
+        sm = re.search(r'\ssizes="([^"]*)"', tag)
+        sizes = sm.group(1) if sm else "100vw"
+        tag = re.sub(r'\ssizes="[^"]*"', "", tag)
+        if not re.search(r'\swidth="', tag):
+            tag = tag.replace("<img", f'<img width="{info["w"]}" height="{info["h"]}"', 1)
+        if 'decoding="' not in tag and "fetchpriority" not in tag:
+            tag = tag.replace("<img", '<img decoding="async"', 1)
+        srcset = lambda ext: ", ".join(f"{pre}img/w/{name}-{w}.{ext} {w}w" for w in info["widths"])
+        return (f'<picture><source type="image/avif" srcset="{srcset("avif")}" sizes="{sizes}">'
+                f'<source type="image/webp" srcset="{srcset("webp")}" sizes="{sizes}">{tag}</picture>')
+    return IMG.sub(fix, s)
+
+def perf(s):
+    return responsive(self_host_fonts(s))
+
 def rewrite_paths(s):
     s = re.sub(r'((?:href|src)=")(assets|img)/', r'\1../\2/', s)
     return s.replace("url(img/", "url(../img/")
@@ -86,14 +123,14 @@ for f in sorted(os.listdir(site_dir)):
     p = os.path.join(site_dir, f); s = open(p).read()
     s = rewrite_paths(s)
     s = inject_bar(s, concept_bar("../", "site"))
-    open(p, "w").write(bust(private_preview(announce_new_tabs(s))))
+    open(p, "w").write(bust(perf(private_preview(announce_new_tabs(s)))))
 
 # ---- brand book: content-only page -> full document
 bp = os.path.join(ROOT, "brand-book", "index.html")
 s = rewrite_paths(open(bp).read())
 s = s.replace('href="../site/" target="_blank" rel="noopener"', 'href="../site/"')
 s = inject_bar(s, concept_bar("../", "book"))
-open(bp, "w").write(bust(private_preview(announce_new_tabs(shell(s, "Oshare Brand Book", "")))))
+open(bp, "w").write(bust(perf(private_preview(announce_new_tabs(shell(s, "Oshare Brand Book", ""))))))
 
 # ---- hub
 FILES = [
@@ -120,7 +157,6 @@ hub = f"""<!doctype html>
 <meta property="og:description" content="Brand book and website prototype for Oshare Sushi + Bar, Lowell MA.">
 <meta property="og:image" content="img/preview-site.jpg">
 <meta name="theme-color" content="#1F3F80">
-{FONTS}
 <link rel="stylesheet" href="assets/oshare.css">
 <link rel="stylesheet" href="assets/hub.css">
 </head>
@@ -143,11 +179,11 @@ hub = f"""<!doctype html>
   <section class="sec" aria-label="Explore">
     <div class="wrap hub-cards">
       <a class="hub-card" href="brand-book/">
-        <span class="hub-card__img"><img src="img/preview-brand-book.jpg" alt="Brand book cover in cobalt with the orange ensō" width="1200" height="750" loading="lazy"></span>
+        <span class="hub-card__img"><img src="img/preview-brand-book.jpg" alt="Brand book cover in cobalt with the orange ensō" width="1200" height="750" loading="lazy" sizes="(max-width: 47.5em) 100vw, (min-width: 82.5em) 600px, 46vw"></span>
         <span class="hub-card__body"><b>Brand Book</b><span>Discovery, strategy, identity, applications and the build plan: Toast integration, SEO, WordPress, tokens, asset inventory and the owner checklist.</span><span class="link-arrow">Read it{ARROW}</span></span>
       </a>
       <a class="hub-card" href="site/">
-        <span class="hub-card__img"><img src="img/preview-site.jpg" alt="Website homepage with the ensō circling a tray of nigiri" width="1200" height="750" loading="lazy"></span>
+        <span class="hub-card__img"><img src="img/preview-site.jpg" alt="Website homepage with the ensō circling a tray of nigiri" width="1200" height="750" loading="lazy" sizes="(max-width: 47.5em) 100vw, (min-width: 82.5em) 600px, 46vw"></span>
         <span class="hub-card__body"><b>Site Prototype</b><span>Home, Menu, Our Story, Gallery and Visit. Real photos, all 124 dishes with Toast order links, live open-now status.</span><span class="link-arrow">Explore it{ARROW}</span></span>
       </a>
     </div>
@@ -169,5 +205,5 @@ hub = f"""<!doctype html>
 </body>
 </html>
 """
-open(os.path.join(ROOT, "index.html"), "w").write(bust(private_preview(hub)))
+open(os.path.join(ROOT, "index.html"), "w").write(bust(perf(private_preview(hub))))
 print("built: index.html, brand-book/index.html, site/*.html")

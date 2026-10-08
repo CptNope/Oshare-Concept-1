@@ -116,7 +116,7 @@ PHOTOS = [("night.jpg", "Overhead table on dark wood (hero)", "Toast Sites CDN �
           (f"{k}.jpg", n, "Toast online ordering menu item photo, 720px") for k, n in [("lobster", "Lobster Rangoon Maki"), ("firebender", "Firebender Maki"), ("crispyRice", "Tuna Crispy Rice"),
           ("santaka", "Santaka Beef Noodle"), ("bao", "Fried Chicken Bao"), ("karaage", "Chicken Karaage"), ("katsu", "Chicken Katsu"), ("beefTataki", "Beef Tataki"),
           ("crabSalad", "Crab Avocado Salad"), ("salmon", "Lemon Butter Salmon"), ("spicyChicken", "Spicy Chicken"), ("beefTeri", "Beef Teriyaki"), ("edamame", "Spicy Edamame"), ("stirfry", "Stir-Fried Noodles")]]
-asset_rows = "".join(f'<tr><td><img src="img/{f}" alt="" width="64" height="51" style="width:64px;height:51px;object-fit:cover" loading="lazy"></td><td>{e(n)}</td><td>{e(s)}</td><td>{C("License")}</td></tr>' for f, n, s in PHOTOS)
+asset_rows = "".join(f'<tr><td><img src="img/{f}" alt="" width="64" height="51" style="width:64px;height:51px;object-fit:cover" loading="lazy" sizes="72px"></td><td>{e(n)}</td><td>{e(s)}</td><td>{C("License")}</td></tr>' for f, n, s in PHOTOS)
 
 CHECK = [
     ("Brand", [("c-dir", "Approve the Blue & White direction (cobalt, glaze, ensō orange)"), ("c-logo", "Approve the refined vector logo and supply original logo files"), ("c-tag", "Pick a line: “Dressed-up sushi on Market Street.” or an alternate"), ("c-name", "Tell us the story behind the name Oshare (or keep it untold)")]),
@@ -137,10 +137,13 @@ SOURCES = [("Oshare Sushi + Bar website (home, about, hours)", "https://osharesu
            ("Toast standard API access FAQs", "https://doc.toasttab.com/doc/devguide/devApiAccessFAQs.html"), ("Toast ordering integration checklist", "https://doc.toasttab.com/doc/cookbook/apiIntegrationChecklistOrdering.html")]
 sources_html = "".join(f'<li><a href="{u}" target="_blank" rel="noopener">{e(t)}</a></li>' for t, u in SOURCES)
 
+# image sizes hints (rendered widths measured from 360 to 1920px); build_pages.py turns them into AVIF/WebP srcsets
+PH4 = "(max-width: 37.5em) 100vw, (max-width: 60em) 46vw, 24vw"
+PH3 = "(max-width: 37.5em) 100vw, (max-width: 60em) 50vw, 28vw"
+ART_B = "(max-width: 37.5em) 35vw, (max-width: 60em) 17vw, 11vw"
+
 page = f"""<title>Oshare Brand Book</title>
 <meta name="description" content="Brand book and build plan for Oshare Sushi + Bar, Lowell MA.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/oshare.css">
 <link rel="stylesheet" href="assets/bb.css">
 {ICONS}
@@ -218,10 +221,10 @@ page = f"""<title>Oshare Brand Book</title>
       <p><b>The wordmark's "A".</b> The slashed A reads as a sword cut. We kept it in this proposal because it's theirs, but it leans on the samurai cliché the brief asks us to avoid. {C("Discuss")}</p></div>
   </div>
   <div class="g4" style="margin-top:2rem">
-    <figure class="ph"><img src="img/tray.jpg" alt="Nigiri Deluxe in lacquer tray on marble" loading="lazy"><figcaption>Marble, lacquer, 3/4 angle</figcaption></figure>
-    <figure class="ph"><img src="img/udon.jpg" alt="Noodles in a cobalt porcelain bowl" loading="lazy"><figcaption>The cobalt bowls the palette comes from</figcaption></figure>
-    <figure class="ph"><img src="img/lobster.jpg" alt="Lobster Rangoon Maki" loading="lazy"><figcaption>Edible flowers, long plates</figcaption></figure>
-    <figure class="ph"><img src="img/night.jpg" alt="Overhead table on dark wood" loading="lazy"><figcaption>The one evening shot</figcaption></figure>
+    <figure class="ph"><img src="img/tray.jpg" alt="Nigiri Deluxe in lacquer tray on marble" loading="lazy" sizes="{PH4}"><figcaption>Marble, lacquer, 3/4 angle</figcaption></figure>
+    <figure class="ph"><img src="img/udon.jpg" alt="Noodles in a cobalt porcelain bowl" loading="lazy" sizes="{PH4}"><figcaption>The cobalt bowls the palette comes from</figcaption></figure>
+    <figure class="ph"><img src="img/lobster.jpg" alt="Lobster Rangoon Maki" loading="lazy" sizes="{PH4}"><figcaption>Edible flowers, long plates</figcaption></figure>
+    <figure class="ph"><img src="img/night.jpg" alt="Overhead table on dark wood" loading="lazy" sizes="{PH4}"><figcaption>The one evening shot</figcaption></figure>
   </div>
 </section>
 
@@ -323,19 +326,19 @@ page = f"""<title>Oshare Brand Book</title>
 <section class="ch" id="directions">{chead("directions", "Directions explored", "The brief asked for three directions. Each was built from something real in Oshare's world. You chose Blue &amp; White.")}
   <div class="g3">
     <div class="dir dir--chosen">
-      <div class="dir__art"><div class="artA"><p>Dressed-up sushi on <span>Market Street.</span></p><div><img src="img/night.jpg" alt=""><span class="enso"></span></div></div></div>
+      <div class="dir__art"><div class="artA"><p>Dressed-up sushi on <span>Market Street.</span></p><div><img src="img/night.jpg" alt="" loading="lazy" sizes="(max-width: 37.5em) 100vw, (max-width: 60em) 46vw, 30vw"><span class="enso"></span></div></div></div>
       <h3>A · Blue &amp; White <span class="tag tag--r" style="margin-left:.3rem">Selected</span></h3>
       <div class="dir__chips"><i style="background:#F3F5F9"></i><i style="background:#1F3F80"></i><i style="background:#F25A0A"></i><i style="background:#0B1A36"></i></div>
       <dl><dt>Brief lane</dt><dd>Contemporary Culinary Editorial</dd><dt>Source</dt><dd>Oshare's cobalt sometsuke bowls and the orange brush ring</dd><dt>Strength</dt><dd>Food-first, unmistakably theirs, calm enough to last years</dd><dt>Risk</dt><dd>Refined directions can drift toward "tasteful restaurant site". The orange ring and full cobalt fields keep it from going quiet.</dd></dl>
     </div>
     <div class="dir">
-      <div class="dir__art"><div class="artB"><header>Oshare<small>Lowell, Mass.</small></header><section><figure><img src="img/tray.jpg" alt=""><b>1</b><figcaption>Nigiri Deluxe</figcaption></figure><figure><img src="img/santaka.jpg" alt=""><b>2</b><figcaption>Santaka Beef</figcaption></figure><figure><img src="img/lobster.jpg" alt=""><b>3</b><figcaption>Lobster Rangoon</figcaption></figure></section></div></div>
+      <div class="dir__art"><div class="artB"><header>Oshare<small>Lowell, Mass.</small></header><section><figure><img src="img/tray.jpg" alt="" loading="lazy" sizes="{ART_B}"><b>1</b><figcaption>Nigiri Deluxe</figcaption></figure><figure><img src="img/santaka.jpg" alt="" loading="lazy" sizes="{ART_B}"><b>2</b><figcaption>Santaka Beef</figcaption></figure><figure><img src="img/lobster.jpg" alt="" loading="lazy" sizes="{ART_B}"><b>3</b><figcaption>Lobster Rangoon</figcaption></figure></section></div></div>
       <h3>B · Mill City Field Guide</h3>
       <div class="dir__chips"><i style="background:#121212"></i><i style="background:#F1EFE8"></i><i style="background:#F25A0A"></i></div>
       <dl><dt>Brief lane</dt><dd>Modern Neighborhood Hospitality</dd><dt>Source</dt><dd>Lowell National Historical Park's brochure system: black title band, strict grid, numbered stops</dd><dt>Strength</dt><dd>Deeply local; the menu becomes a guide to Oshare</dd><dt>Risk</dt><dd>Reads institutional; warmth depends entirely on photography</dd></dl>
     </div>
     <div class="dir">
-      <div class="dir__art"><div class="artC"><p class="t">OSHARE</p><p><b>The Acre, $18</b>Shrimp tempura, lobster mix, mango, plum sauce</p><img src="img/firebender.jpg" alt=""><span class="call" style="right:36cqw;top:44cqw">ghost pepper sate</span><span class="call" style="right:6cqw;top:38cqw">salmon</span></div></div>
+      <div class="dir__art"><div class="artC"><p class="t">OSHARE</p><p><b>The Acre, $18</b>Shrimp tempura, lobster mix, mango, plum sauce</p><img src="img/firebender.jpg" alt="" loading="lazy" sizes="(max-width: 37.5em) 70vw, (max-width: 60em) 34vw, 22vw"><span class="call" style="right:36cqw;top:44cqw">ghost pepper sate</span><span class="call" style="right:6cqw;top:38cqw">salmon</span></div></div>
       <h3>C · Oshare Magazine</h3>
       <div class="dir__chips"><i style="background:#FFD9C2"></i><i style="background:#1F3F80"></i><i style="background:#E2450A"></i><i style="background:#121212"></i></div>
       <dl><dt>Brief lane</dt><dd>Bold Japanese-Fusion Expression</dd><dt>Source</dt><dd>"Oshare" means stylish: Japanese street-style magazines, cover lines and outfit callouts for each dish</dd><dt>Strength</dt><dd>Loud, fun, very shareable</dd><dt>Risk</dt><dd>Tips into gimmick across a whole site; leans on the name's meaning before the owners confirm it</dd></dl>
@@ -371,7 +374,7 @@ page = f"""<title>Oshare Brand Book</title>
     {''.join(f'<div class="misuse"><div class="spec {bg}">{inner}</div><span class="x" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span><p>{t}</p></div>' for bg, inner, t in [
       ("spec--white", '<div class="lockup lockup--ink" style="transform:scaleX(1.45)"><span class="enso"></span><span class="wordmark"></span></div>', "Stretch or squash it."),
       ("spec--white", '<div class="lockup lockup--ink"><span class="enso" style="background:#2E58A6"></span><span class="wordmark"></span></div>', "Recolor the ring. It is always orange, or the single mono color."),
-      ("spec--photo\" style=\"background-image:url(img/spread.jpg)", '<div class="lockup lockup--ink"><span class="enso"></span><span class="wordmark"></span></div>', "Set it on a busy photo without a cobalt or glaze field."),
+      ("spec--photo\" style=\"background-image:url(img/spread.jpg);background-image:image-set(url(img/w/spread-720.avif) type('image/avif'), url(img/w/spread-720.webp) type('image/webp'), url(img/spread.jpg) type('image/jpeg'))", '<div class="lockup lockup--ink"><span class="enso"></span><span class="wordmark"></span></div>', "Set it on a busy photo without a cobalt or glaze field."),
       ("spec--white", '<div class="lockup lockup--ink" style="filter:drop-shadow(6px 6px 3px rgba(0,0,0,.45))"><span class="enso"></span><span class="wordmark"></span></div>', "Add shadows, glows or bevels."),
       ("spec--white", '<div class="lockup lockup--ink"><span class="enso"></span><span class="wordmark" style="transform:rotate(-18deg)"></span></div>', "Rotate or move the wordmark inside the ring."),
       ("spec--enso", '<div class="lockup lockup--white"><span class="enso"></span><span class="wordmark"></span></div>', "Put the color lockup on orange, where the ring disappears.")])}
@@ -425,9 +428,9 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="photo">{chead("photo", "Photography", "The existing shoot sets the standard. The gap is everything that isn't food.")}
   <div class="g3">
-    <figure class="ph ph--do"><img src="img/crispyRice.jpg" alt="Tuna crispy rice on a long white plate" loading="lazy"><figcaption><b>Keep:</b> marble ground, soft daylight, 3/4 angle, edible flowers.</figcaption></figure>
-    <figure class="ph ph--do"><img src="img/santaka.jpg" alt="Santaka noodles in porcelain" loading="lazy"><figcaption><b>Keep:</b> the cobalt porcelain in frame. It is the palette.</figcaption></figure>
-    <figure class="ph ph--do"><img src="img/night.jpg" alt="Overhead table at night" loading="lazy"><figcaption><b>Keep:</b> overhead tables on dark wood for evening and bar stories.</figcaption></figure>
+    <figure class="ph ph--do"><img src="img/crispyRice.jpg" alt="Tuna crispy rice on a long white plate" loading="lazy" sizes="{PH3}"><figcaption><b>Keep:</b> marble ground, soft daylight, 3/4 angle, edible flowers.</figcaption></figure>
+    <figure class="ph ph--do"><img src="img/santaka.jpg" alt="Santaka noodles in porcelain" loading="lazy" sizes="{PH3}"><figcaption><b>Keep:</b> the cobalt porcelain in frame. It is the palette.</figcaption></figure>
+    <figure class="ph ph--do"><img src="img/night.jpg" alt="Overhead table at night" loading="lazy" sizes="{PH3}"><figcaption><b>Keep:</b> overhead tables on dark wood for evening and bar stories.</figcaption></figure>
   </div>
   <div class="g2" style="margin-top:2.5rem">
     <div><h3>Shot list for the first shoot {C("Schedule")}</h3>
@@ -452,7 +455,7 @@ page = f"""<title>Oshare Brand Book</title>
     <div class="row"><a class="btn" href="{ORDER}" target="_blank" rel="noopener">{ico("bag")}Order pickup</a><a class="btn btn--ghost" href="#components">See the menu</a><a class="btn btn--sm" href="#components">Small</a><span class="btn" aria-disabled="true">Ordering paused</span><a class="link-arrow" href="#components">Add to pickup order{ico("arrow")}</a></div>
     <div class="row"><span class="status" data-open="true"><span class="status__dot"></span><span><b>Open now</b> Until 9 PM tonight</span></span><span class="status" data-open="false"><span class="status__dot"></span><span><b>Closed now</b> Opens tomorrow at 4 PM</span></span><button class="chip" type="button" aria-pressed="true">No raw fish</button><button class="chip" type="button" aria-pressed="false">Spicy</button><span class="note">Pitch note</span></div>
     <ul class="mlist" role="list" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1rem">
-      <li class="mitem mitem--photo"><img class="mitem__img" src="img/firebender.jpg" alt=""><h3>Firebender Maki <span class="mark mark--raw">RAW</span><span class="mark mark--hot"><svg><use href="#i-chili"/></svg><svg><use href="#i-chili"/></svg></span></h3><span class="mitem__price">$17</span><p class="mitem__desc">Spicy tuna mix, salmon, apple, avocado, sweet potato tempura, ghost pepper sate</p><div class="mitem__act"><a href="{ORDER}/item-firebender-maki_1d96c5db-8b62-47e7-8c83-397c6780c539" target="_blank" rel="noopener">Add to order{ico("arrow")}</a></div></li>
+      <li class="mitem mitem--photo"><img class="mitem__img" src="img/firebender.jpg" alt="" loading="lazy" sizes="(max-width: 26.25em) 84px, 112px"><h3>Firebender Maki <span class="mark mark--raw">RAW</span><span class="mark mark--hot"><svg><use href="#i-chili"/></svg><svg><use href="#i-chili"/></svg></span></h3><span class="mitem__price">$17</span><p class="mitem__desc">Spicy tuna mix, salmon, apple, avocado, sweet potato tempura, ghost pepper sate</p><div class="mitem__act"><a href="{ORDER}/item-firebender-maki_1d96c5db-8b62-47e7-8c83-397c6780c539" target="_blank" rel="noopener">Add to order{ico("arrow")}</a></div></li>
       <li class="mitem" data-oos="true"><h3>Japanese Uni <span class="mark mark--raw">RAW</span></h3><span class="mitem__price">$20</span><p class="mitem__desc">Menu item, sold-out state.</p><div class="mitem__act"><span class="oos">Sold out today</span></div></li>
     </ul>
   </div>
@@ -469,7 +472,7 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="website">{chead("website", "Website", "Five pages built on this system with real menu data, real photos and live Toast links.")}
   <div class="g2" style="align-items:center">
-    <figure class="ph" style="margin:0"><img src="img/night.jpg" alt="" loading="lazy"><figcaption>Homepage hero: the ring circles the Nigiri Deluxe tray at every screen size.</figcaption></figure>
+    <figure class="ph" style="margin:0"><img src="img/night.jpg" alt="" loading="lazy" sizes="(max-width: 37.5em) 100vw, (max-width: 60em) 50vw, 48vw"><figcaption>Homepage hero: the ring circles the Nigiri Deluxe tray at every screen size.</figcaption></figure>
     <div class="stack">
       <p><b>Home:</b> hero, live open status, the Lowell rolls, plates with order links, sushi bar vs kitchen, chefs, +Bar, ratings, visit.</p>
       <p><b>Menu:</b> all {n_items} dishes as indexable HTML with section nav, search, "no raw fish" and "spicy" filters, and a direct Toast link on every dish.</p>
@@ -482,9 +485,9 @@ page = f"""<title>Oshare Brand Book</title>
 
 <section class="ch" id="social">{chead("social", "Social", "Three templates. Real photos, a cobalt band, one orange note.")}
   <div class="g3" style="align-items:start">
-    <div><div class="ig"><img src="img/lobster.jpg" alt="Instagram post template with Lobster Rangoon Maki"><span class="rimline" style="bottom:19cqw"></span><div class="bar"><b>Lobster Rangoon</b><span>$19</span></div></div><p class="mock-cap">Dish post · 1080 × 1080</p></div>
+    <div><div class="ig"><img src="img/lobster.jpg" alt="Instagram post template with Lobster Rangoon Maki" loading="lazy" sizes="(max-width: 37.5em) 115vw, (max-width: 60em) 56vw, 36vw"><span class="rimline" style="bottom:19cqw"></span><div class="bar"><b>Lobster Rangoon</b><span>$19</span></div></div><p class="mock-cap">Dish post · 1080 × 1080</p></div>
     <div><div class="ig ig--type"><span class="enso ring"></span><p class="t">The Acre</p><p>Shrimp tempura, lobster mix, avocado, mango, shrimp, plum sauce, sriracha, fried shallots.</p><span class="p">$18</span></div><p class="mock-cap">Type post · named rolls, specials</p></div>
-    <div style="max-width:300px"><div class="ig ig--story"><div class="top"><p class="t">Open tonight until 9</p><p>Tuesday to Sunday on Market Street. Order pickup from the link.</p></div><img src="img/tray.jpg" alt="Story template with Nigiri Deluxe"><span class="cta">Order pickup</span></div><p class="mock-cap">Story · 1080 × 1920</p></div>
+    <div style="max-width:300px"><div class="ig ig--story"><div class="top"><p class="t">Open tonight until 9</p><p>Tuesday to Sunday on Market Street. Order pickup from the link.</p></div><img src="img/tray.jpg" alt="Story template with Nigiri Deluxe" loading="lazy" sizes="390px"><span class="cta">Order pickup</span></div><p class="mock-cap">Story · 1080 × 1920</p></div>
   </div>
   <p class="muted" style="margin-top:1.5rem">Captions follow the voice in 2.6. Hashtag: #OshareSushiBar. Link in bio goes to the Toast order page, not a delivery app. {C("Handles")}</p>
 </section>
@@ -534,7 +537,7 @@ page = f"""<title>Oshare Brand Book</title>
     <div class="rule-top stack"><h3>Google Business Profile</h3><p class="muted">Primary category Sushi restaurant, secondary Japanese restaurant and Bar. Hours matching the site. Menu link to /menu/, order link to Toast. Monthly photo uploads from the new shoot.</p>{C("Access")}</div>
     <div class="rule-top stack"><h3>Name consistency</h3><p class="muted">Pick one: "Oshare Sushi + Bar". Fix "Sushi &amp; Bar" and "Sushi Bar" variants and the stale OpenTable hours. Same address and phone format everywhere.</p>{C()}</div>
     <div class="rule-top stack"><h3>AI-ready facts</h3><p class="muted">A plain, factual paragraph on /visit/ with name, address, hours, cuisine, ordering and reservations, plus a short FAQ: parking, reservations, delivery, lunch, raw options.</p>{R}</div>
-    <div class="rule-top stack"><h3>Performance</h3><p class="muted">AVIF/WebP photos with set sizes, the hero preloaded, fonts subset to Latin, no page builders, full-page caching. Target: all Core Web Vitals green on mobile.</p>{R}</div>
+    <div class="rule-top stack"><h3>Performance</h3><p class="muted">AVIF/WebP photos with set sizes, the hero image fetched first, fonts self-hosted and subset to Latin with the headline face preloaded, no page builders, full-page caching. The prototype already ships the image and font parts. Target: all Core Web Vitals green on mobile.</p>{R}</div>
     <div class="rule-top stack"><h3>Content to add</h3><p class="muted">One post a month: a new roll, the story behind The Acre, a chef profile, game-night specials. Each links to the menu and Toast. No city doorway pages.</p>{R}</div>
   </div>
   <p class="muted" style="margin-top:1.5rem;font-size:var(--fs-sm)">Seed topics (sushi Lowell MA, best sushi Lowell, sushi takeout and delivery Lowell, Japanese restaurant Lowell, sashimi Lowell) are mapped to intent. We did not pull search volumes; add Search Console data after launch.</p>
@@ -579,7 +582,7 @@ page = f"""<title>Oshare Brand Book</title>
 </section>
 
 <section class="ch" id="checklist">{chead("checklist", "Owner approval checklist", "Tick items off as they're confirmed. Your ticks are saved in this browser only.")}
-  <div class="progress" aria-hidden="true"><i style="width:0"></i></div><p class="muted" data-check-count style="margin-top:.6rem" aria-live="polite"></p>
+  <div class="progress" aria-hidden="true"><i></i></div><p class="muted" data-check-count style="margin-top:.6rem" aria-live="polite"></p>
   <div class="check">{check_html}</div>
 </section>
 

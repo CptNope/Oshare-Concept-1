@@ -137,7 +137,16 @@
     function show(i) {
       idx = (i + tiles.length) % tiles.length;
       var t = tiles[idx];
-      if (!im) { im = document.createElement("img"); im.decoding = "async"; holder.appendChild(im); }
+      if (!im) {
+        /* same AVIF/WebP files as the tile, picked for the dialog's width */
+        var pic = document.createElement("picture");
+        ["avif", "webp"].forEach(function (f) { var so = document.createElement("source"); so.type = "image/" + f; so.sizes = "(min-width: 80em) 1200px, 94vw"; pic.appendChild(so); });
+        im = document.createElement("img"); im.decoding = "async"; pic.appendChild(im); holder.appendChild(pic);
+      }
+      Array.prototype.forEach.call(im.parentNode.querySelectorAll("source"), function (so) {
+        var from = t.querySelector('source[type="' + so.type + '"]');
+        if (from) so.srcset = from.getAttribute("srcset"); else so.removeAttribute("srcset");
+      });
       im.src = t.getAttribute("href"); im.alt = t.dataset.caption || "";
       cap.textContent = t.dataset.caption || "";
       count.textContent = (idx + 1) + " / " + tiles.length;

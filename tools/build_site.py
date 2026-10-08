@@ -79,9 +79,6 @@ def head(title, desc, path, extra_ld=None):
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="https://osharesushi.com/img/spread.jpg">
 <meta name="theme-color" content="#1F3F80">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/oshare.css">
 {ld}
 </head>
@@ -151,10 +148,16 @@ def write(name, body):
     print("wrote", name, len(body))
 
 # ------------------------------------------------------------------ HOME
+PLATE_SIZES = {
+    "plate--wide": "(max-width: 60em) 100vw, (min-width: 82.5em) 820px, 62vw",
+    "plate--lg": "(max-width: 37.5em) 100vw, (min-width: 82.5em) 640px, 50vw",
+    "": "(max-width: 37.5em) 100vw, (max-width: 60em) 46vw, (min-width: 82.5em) 390px, 30vw",
+}
+
 def plate(name, img, cls, alt):
     it = find(name)
     return f"""<article class="plate {cls}">
-  <div class="plate__img"><img src="img/{img}.jpg" alt="{e(alt)}" loading="lazy" width="720" height="576"><span class="enso plate__ring" aria-hidden="true"></span></div>
+  <div class="plate__img"><img src="img/{img}.jpg" alt="{e(alt)}" loading="lazy" width="720" height="576" sizes="{PLATE_SIZES.get(cls, PLATE_SIZES[''])}"><span class="enso plate__ring" aria-hidden="true"></span></div>
   <div class="plate__row"><h3>{e(it['n'])}</h3><span class="price">{money(it['p'])}</span></div>
   <p>{e(it['d'])} {raw_mark(it.get('raw'))} {hot_mark(it.get('spicy'))}</p>
   <a class="link-arrow" href="{item_url(it)}" target="_blank" rel="noopener">Add <span class="sr-only">{e(it['n'])} </span>to pickup order{ico('arrow')}</a>
@@ -184,7 +187,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
       </div>
     </div>
     <figure class="hero__photo">
-      <img src="img/night.jpg" alt="Overhead view of Oshare's table: nigiri and a salmon roll on a red-rimmed lacquer tray, surrounded by blue-and-white porcelain bowls of salmon, katsu, spicy chicken and edamame on dark wood" width="1372" height="984" fetchpriority="high">
+      <img src="img/night.jpg" alt="Overhead view of Oshare's table: nigiri and a salmon roll on a red-rimmed lacquer tray, surrounded by blue-and-white porcelain bowls of salmon, katsu, spicy chicken and edamame on dark wood" width="1372" height="984" fetchpriority="high" sizes="(max-width: 57.5em) 100vw, (max-width: 79.5em) 790px, (max-width: 108em) 62vw, (max-width: 122.5em) 1060px, 54vw">
       <span class="enso paint" aria-hidden="true"></span>
       <figcaption>Nigiri Deluxe, center</figcaption>
     </figure>
@@ -224,11 +227,11 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
 
   <section class="counters" aria-label="The sushi bar and the kitchen">
     <div class="counter">
-      <figure><img src="img/tray.jpg" alt="Nigiri Deluxe on a red-rimmed black lacquer tray: ten nigiri and a spicy salmon roll on marble" loading="lazy" width="1600" height="1280"></figure>
+      <figure><img src="img/tray.jpg" alt="Nigiri Deluxe on a red-rimmed black lacquer tray: ten nigiri and a spicy salmon roll on marble" loading="lazy" width="1600" height="1280" sizes="(max-width: 53.75em) 100vw, 50vw"></figure>
       <div class="counter__body"><h3>The sushi bar</h3><p class="muted">Nigiri, sashimi and sets cut to order.</p><ul class="tnum">{counter_list(["Nigiri Deluxe", "Sashimi Deluxe", "Salmon Lover Set", "Party of 2"])}</ul><a class="link-arrow" href="menu.html#sets">All sushi sets{ico('arrow')}</a></div>
     </div>
     <div class="counter field">
-      <figure><img src="img/udon.jpg" alt="Stir-fried noodles with shrimp, carrots and scallions in a blue-and-white porcelain bowl" loading="lazy" width="1600" height="1280"></figure>
+      <figure><img src="img/udon.jpg" alt="Stir-fried noodles with shrimp, carrots and scallions in a blue-and-white porcelain bowl" loading="lazy" width="1600" height="1280" sizes="(max-width: 53.75em) 100vw, 50vw"></figure>
       <div class="counter__body"><h3>The kitchen</h3><p class="muted">Noodles, bao and rice plates with Korean heat.</p><ul class="tnum">{counter_list(["Santaka Beef Noodle", "Spicy Beef Bao", "Chicken Karaage", "Kogi Beef Rice Bowl"])}</ul><a class="link-arrow" href="menu.html#noodles">Noodles &amp; udon{ico('arrow')}</a></div>
     </div>
   </section>
@@ -241,7 +244,7 @@ home = head("Oshare Sushi + Bar | Sushi, Maki & Cocktails on Market Street, Lowe
         <p class="muted" style="max-width:52ch">Sushi and Asian cuisine made with care and precision, from the sushi bar to the wok. <span class="note">Chef portraits + interview needed for full bios</span></p>
         <a class="link-arrow" href="story.html">Read our story{ico('arrow')}</a>
       </div>
-      <figure style="margin:0"><img src="img/spread.jpg" alt="A full Oshare spread on marble: bulgogi beef, shrimp noodles, a rice bowl with fried egg, edamame and crispy rice in blue-and-white porcelain" loading="lazy" width="1600" height="1280"></figure>
+      <figure style="margin:0"><img src="img/spread.jpg" alt="A full Oshare spread on marble: bulgogi beef, shrimp noodles, a rice bowl with fried egg, edamame and crispy rice in blue-and-white porcelain" loading="lazy" width="1600" height="1280" sizes="(max-width: 53.75em) 100vw, (min-width: 82.5em) 490px, 38vw"></figure>
     </div>
   </section>
 
@@ -291,7 +294,7 @@ def menu_item(it):
     img = it.get("img")
     text = (it["n"] + " " + it.get("d", "")).lower()
     cls = "mitem mitem--photo" if img else "mitem"
-    pic = f'<img class="mitem__img" src="img/{img}.jpg" alt="" loading="lazy" width="720" height="576">' if img else ""
+    pic = f'<img class="mitem__img" src="img/{img}.jpg" alt="" loading="lazy" width="720" height="576" sizes="(max-width: 26.25em) 84px, 112px">' if img else ""
     marks = raw_mark(it.get("raw")) + hot_mark(it.get("spicy"))
     oos = '<span class="oos">Sold out today</span>' if it.get("oos") else ""
     act = (f'<div class="mitem__act"><a href="{item_url(it)}" target="_blank" rel="noopener">Add <span class="sr-only">{e(it['n'])} </span>to order{ico("arrow")}</a>{oos}</div>'
@@ -371,12 +374,12 @@ story = head("Our Story | Oshare Sushi + Bar, Lowell MA", "Chefs Bryan and Son b
         <p>Everything arrives the way you see it in our photos: on blue-and-white porcelain and red-rimmed lacquer.</p>
         <p><span class="note">Opening year, how the chefs met, and family details: interview needed</span></p>
       </div>
-      <figure><img src="img/tray.jpg" alt="Nigiri Deluxe on a red-rimmed lacquer tray" loading="lazy" width="1600" height="1280"></figure>
+      <figure><img src="img/tray.jpg" alt="Nigiri Deluxe on a red-rimmed lacquer tray" loading="lazy" width="1600" height="1280" sizes="(max-width: 53.75em) 100vw, (min-width: 82.5em) 580px, 45vw"></figure>
     </div>
   </section>
   <section class="sec field" aria-labelledby="lowell-h">
     <div class="wrap story-grid">
-      <figure><img src="img/spread.jpg" alt="Overhead spread of Oshare dishes in blue-and-white bowls on marble" loading="lazy" width="1600" height="1280"></figure>
+      <figure><img src="img/spread.jpg" alt="Overhead spread of Oshare dishes in blue-and-white bowls on marble" loading="lazy" width="1600" height="1280" sizes="(max-width: 53.75em) 100vw, (min-width: 82.5em) 580px, 45vw"></figure>
       <div class="prose">
         <h2 id="lowell-h">Made in Lowell.</h2>
         <p class="lede">Our menu has The Acre, the Red Sox Maki and the Celtic Roll on it for a reason: this is a Lowell restaurant.</p>
@@ -407,7 +410,9 @@ G = [("night", "The full table on dark wood: Nigiri Deluxe in the lacquer tray, 
      ("karaage", "Chicken Karaage with watermelon radish"), ("beefTataki", "Beef Tataki"), ("katsu", "Chicken Katsu with tonkatsu sauce and slaw"),
      ("salmon", "Lemon Butter Salmon"), ("crabSalad", "Crab Avocado Salad"), ("spicyChicken", "Spicy Chicken with fried egg"),
      ("beefTeri", "Beef Teriyaki"), ("edamame", "Spicy Edamame"), ("stirfry", "Stir-Fried Noodles")]
-tiles = "".join(f'<a href="img/{k}.jpg" data-caption="{e(c)}"><img src="img/{k}.jpg" alt="" loading="lazy"><span>{e(c)}</span></a>' for k, c in G)
+GALLERY_SIZES = "(max-width: 37.5em) 100vw, (max-width: 60em) 46vw, (min-width: 82.5em) 400px, 31vw"
+def tile_load(i): return ' fetchpriority="high"' if i == 0 else '' if i < 3 else ' loading="lazy"'
+tiles = "".join(f'<a href="img/{k}.jpg" data-caption="{e(c)}"><img src="img/{k}.jpg" alt=""{tile_load(i)} sizes="{GALLERY_SIZES}"><span>{e(c)}</span></a>' for i, (k, c) in enumerate(G))
 gallery = head("Gallery | Oshare Sushi + Bar, Lowell MA", "Photos of sushi, maki, noodles and plates from Oshare Sushi + Bar on Market Street in Lowell, MA.", "gallery/") + header("gallery") + f"""
 <main id="main">
   <section class="phead field" aria-labelledby="gal-h">
