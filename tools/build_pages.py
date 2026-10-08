@@ -30,6 +30,15 @@ def concept_bar(prefix, current):
             f'<div class="concept__links">{link(prefix + "brand-book/", "Brand Book", "book")}{link(prefix + "site/", "Site Prototype", "site")}'
             f'{link(prefix + "#design-files", "Design Files", "files")}<a class="ext" href="{REPO}" rel="noopener">GitHub{ARROW}</a></div></div></nav>')
 
+NOINDEX = '<meta name="robots" content="noindex, nofollow">'
+
+def private_preview(s):
+    """Keep the concept out of search: no canonical pointing at the real osharesushi.com, and noindex on every page."""
+    s = re.sub(r'<link rel="canonical"[^>]*>\n?', '', s)
+    if NOINDEX not in s:
+        s = re.sub(r'(<meta name="viewport"[^>]*>)', r'\1\n' + NOINDEX, s, count=1)
+    return s
+
 def rewrite_paths(s):
     s = re.sub(r'((?:href|src)=")(assets|img)/', r'\1../\2/', s)
     return s.replace("url(img/", "url(../img/")
@@ -57,14 +66,14 @@ for f in sorted(os.listdir(site_dir)):
     p = os.path.join(site_dir, f); s = open(p).read()
     s = rewrite_paths(s)
     s = inject_bar(s, concept_bar("../", "site"))
-    open(p, "w").write(s)
+    open(p, "w").write(private_preview(s))
 
 # ---- brand book: content-only page -> full document
 bp = os.path.join(ROOT, "brand-book", "index.html")
 s = rewrite_paths(open(bp).read())
 s = s.replace('href="../site/" target="_blank" rel="noopener"', 'href="../site/"')
 s = inject_bar(s, concept_bar("../", "book"))
-open(bp, "w").write(shell(s, "Oshare Brand Book", ""))
+open(bp, "w").write(private_preview(shell(s, "Oshare Brand Book", "")))
 
 # ---- hub
 FILES = [
@@ -140,5 +149,5 @@ hub = f"""<!doctype html>
 </body>
 </html>
 """
-open(os.path.join(ROOT, "index.html"), "w").write(hub)
+open(os.path.join(ROOT, "index.html"), "w").write(private_preview(hub))
 print("built: index.html, brand-book/index.html, site/*.html")

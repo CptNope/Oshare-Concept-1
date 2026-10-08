@@ -58,3 +58,4 @@ Settings → Pages → **Deploy from a branch** → `main` / `(root)`. The `.noj
 - Menu, prices and hours were captured from the restaurant's own site and Toast ordering page on October 8, 2026.
 - Orange dashed "pitch notes" on the prototype mark facts the owners still need to confirm. Hide them from the prototype footer for a clean presentation.
 - Ordering buttons link to the restaurant's live Toast ordering page. Nothing on this site takes orders or payments.
+- Every page carries `noindex, nofollow` and no canonical link, so search engines leave this concept alone. `tools/build_pages.py` adds both on every rebuild; remove `private_preview()` there if the concept ever should be indexed.
