@@ -296,7 +296,8 @@ def menu_item(it):
     cls = "mitem mitem--photo" if img else "mitem"
     pic = f'<img class="mitem__img" src="img/{img}.jpg" alt="" loading="lazy" width="720" height="576" sizes="(max-width: 26.25em) 84px, 112px">' if img else ""
     marks = raw_mark(it.get("raw")) + hot_mark(it.get("spicy"))
-    oos = '<span class="oos">Sold out today</span>' if it.get("oos") else ""
+    # the menu is a snapshot, so the prototype dates its sold-out flags; the live Toast feed would say "today"
+    oos = '<span class="oos">Sold out Oct 8</span>' if it.get("oos") else ""
     act = (f'<div class="mitem__act"><a href="{item_url(it)}" target="_blank" rel="noopener">Add <span class="sr-only">{e(it['n'])} </span>to order{ico("arrow")}</a>{oos}</div>'
            if it.get("id") else f'<div class="mitem__act"><a href="{ORDER}" target="_blank" rel="noopener">Order <span class="sr-only">{e(it['n'])} </span>online{ico("arrow")}</a>{oos}</div>')
     desc = f'<p class="mitem__desc">{e(it["d"])}</p>' if it.get("d") else ""

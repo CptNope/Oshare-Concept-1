@@ -12,6 +12,14 @@
 @font-face { font-family: "Zen Kaku Gothic New"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/zen-kaku-gothic-new-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: "Zen Kaku Gothic New"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/zen-kaku-gothic-new-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: "Zen Kaku Gothic New"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/zen-kaku-gothic-new-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* ō and Ō, which neither face draws: tiny companion families built by tools/build_macron_fonts.py,
+   listed first in --display / --sans and fetched only where those letters appear */
+@font-face { font-family: "Oshare Macron Mincho"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/oshare-macron-mincho-500-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
+@font-face { font-family: "Oshare Macron Mincho"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/oshare-macron-mincho-700-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
+@font-face { font-family: "Oshare Macron Mincho"; font-style: normal; font-weight: 800; font-display: swap; src: url("fonts/oshare-macron-mincho-800-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
+@font-face { font-family: "Oshare Macron Gothic"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/oshare-macron-gothic-400-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
+@font-face { font-family: "Oshare Macron Gothic"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/oshare-macron-gothic-500-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
+@font-face { font-family: "Oshare Macron Gothic"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/oshare-macron-gothic-700-normal.woff2") format("woff2"); unicode-range: U+014C-014D; }
 /* the brand book's one Japanese word (おしゃれ), cut down to its four kana */
 @font-face { font-family: "Zen Kaku Gothic New"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/zen-kaku-gothic-new-ja-oshare-400-normal.woff2") format("woff2"); unicode-range: U+304A, U+3057, U+3083, U+308C; }
 
@@ -38,8 +46,8 @@
   --field-grain: .07;
 
   /* type */
-  --display: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
-  --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --display: "Oshare Macron Mincho", "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --sans: "Oshare Macron Gothic", "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
   --fs-hero: clamp(2.5rem, 1.5rem + 3.6vw, 5rem);
   --fs-h2: clamp(2rem, 1.35rem + 2.4vw, 3.6rem);
   --fs-h3: clamp(1.3rem, 1.12rem + .7vw, 1.7rem);
@@ -80,6 +88,7 @@ body {
 }
 img { max-width: 100%; height: auto; display: block; }
 picture { display: contents; } /* AVIF/WebP wrapper: the <img> inside keeps its usual box and selectors */
+picture > source { display: none; } /* otherwise each <source> becomes an empty grid/flex item */
 a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-color: var(--enso); }
 ::selection { background: var(--enso); color: var(--on-enso); }
@@ -97,6 +106,9 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 .rim { border: 0; height: 7px; margin: 0; color: var(--cobalt-ink);
   background: linear-gradient(currentColor, currentColor) top/100% 3px no-repeat, linear-gradient(currentColor, currentColor) bottom/100% 1px no-repeat; }
 .on-cobalt .rim, .field .rim { color: var(--on-cobalt-2); }
+/* the same rim as the top edge of a grid or table: 3px line, 3px gap, 1px hairline */
+.rim-top, .ratings { border-top: 7px solid var(--rim-c, var(--cobalt-ink)); border-image: linear-gradient(to bottom, var(--rim-c, var(--cobalt-ink)) 3px, transparent 3px, transparent 6px, var(--rim-c, var(--cobalt-ink)) 6px) 7 0 0 0 / 7px 0 0 0; }
+.field .rim-top, .on-cobalt .rim-top { --rim-c: var(--on-cobalt-2); }
 
 /* ---------- the ensō (traced from the restaurant's own mark) ---------- */
 @property --sweep { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
@@ -288,7 +300,7 @@ html { scrollbar-color: var(--cobalt-2) var(--glaze-2); }
 .barband .btn--ghost { --t: #F3F5F9; }
 
 /* ratings */
-.ratings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--cobalt-ink); }
+.ratings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .rating { padding: var(--s5) var(--s5) var(--s5) 0; display: grid; gap: var(--s2); border-bottom: 1px solid var(--line); }
 .rating + .rating { padding-left: var(--s5); border-left: 1px solid var(--line); }
 .rating__n { font-family: var(--display); font-size: clamp(2.6rem, 2rem + 2vw, 3.8rem); font-weight: 800; line-height: 1; color: var(--cobalt-ink); }

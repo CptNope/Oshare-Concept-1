@@ -35,6 +35,7 @@ design/
 tools/
   build_pages.py          regenerates index.html, brand-book/ and site/
   build_assets.py         image sizes (AVIF/WebP) and compact runtime SVGs; run by build_pages.py
+  build_macron_fonts.py   one-off: adds ō / Ō to the brand fonts as small companion files (needs fontTools + brotli)
   build_site.py           site prototype templates
   build_brandbook.py      brand book template
   shoot.js                Playwright screenshot helper used for visual QA
@@ -62,5 +63,6 @@ Settings → Pages → **Deploy from a branch** → `main` / `(root)`. The `.noj
 - Menu, prices and hours were captured from the restaurant's own site and Toast ordering page on October 8, 2026.
 - Orange dashed "pitch notes" on the prototype mark facts the owners still need to confirm. Hide them from the prototype footer for a clean presentation.
 - Ordering buttons link to the restaurant's live Toast ordering page. Nothing on this site takes orders or payments.
+- Sharing: each page carries an absolute `og:image` (1200×630 cards in `img/share/`) and `og:url` on GitHub Pages, so links unfurl in Slack, iMessage and email. Set `PAGES_URL` when rebuilding for another host. The favicon is the orange ensō.
 - Performance: photos are served as AVIF/WebP at the width each layout slot needs, fonts are self-hosted (no Google Fonts requests), and only the headline face is preloaded.
 - Every page carries `noindex, nofollow` and no canonical link, so search engines leave this concept alone. `tools/build_pages.py` adds both on every rebuild; remove `private_preview()` there if the concept ever should be indexed.

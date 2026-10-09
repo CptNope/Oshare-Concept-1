@@ -31,30 +31,30 @@ colors:
   night-ok: "#6FD39B"
 typography:
   display:
-    fontFamily: "Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
+    fontFamily: "Oshare Macron Mincho, Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
     fontSize: "clamp(2.5rem, 1.5rem + 3.6vw, 5rem)"
     fontWeight: 800
     lineHeight: 1.02
     letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
+    fontFamily: "Oshare Macron Mincho, Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
     fontSize: "clamp(2rem, 1.35rem + 2.4vw, 3.6rem)"
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: "-0.02em"
   title:
-    fontFamily: "Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
+    fontFamily: "Oshare Macron Mincho, Shippori Mincho B1, Hiragino Mincho ProN, Yu Mincho, Georgia, serif"
     fontSize: "clamp(1.3rem, 1.12rem + .7vw, 1.7rem)"
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: "-0.02em"
   body:
-    fontFamily: "Zen Kaku Gothic New, Hiragino Sans, Yu Gothic, system-ui, sans-serif"
+    fontFamily: "Oshare Macron Gothic, Zen Kaku Gothic New, Hiragino Sans, Yu Gothic, system-ui, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.65
   label:
-    fontFamily: "Zen Kaku Gothic New, Hiragino Sans, Yu Gothic, system-ui, sans-serif"
+    fontFamily: "Oshare Macron Gothic, Zen Kaku Gothic New, Hiragino Sans, Yu Gothic, system-ui, sans-serif"
     fontSize: "0.78rem"
     fontWeight: 700
     letterSpacing: "0.12em"
@@ -188,7 +188,7 @@ Under `prefers-color-scheme: dark` (unless `data-theme="light"`) and under `[dat
 **Display Font:** Shippori Mincho B1 (with Hiragino Mincho ProN, Yu Mincho, Georgia)
 **Body Font:** Zen Kaku Gothic New (with Hiragino Sans, Yu Gothic, system-ui)
 
-**Character:** The B1 cut's ink-pooled corners read like cobalt brushed on glaze; the gothic is quiet, upright and legible at menu sizes. Both are self-hosted from `assets/fonts/` (Latin subsets, SIL OFL), with a four-kana subset for the brand book's one Japanese word.
+**Character:** The B1 cut's ink-pooled corners read like cobalt brushed on glaze; the gothic is quiet, upright and legible at menu sizes. Both are self-hosted from `assets/fonts/` (Latin subsets, SIL OFL), with a four-kana subset for the brand book's one Japanese word. Neither face draws ō / Ō, so two tiny companion families ("Oshare Macron Mincho" and "Oshare Macron Gothic", built by `tools/build_macron_fonts.py` from the faces' own o, O and macron, placed at their dieresis height) sit first in each stack and load only where those letters appear.
 
 ### Hierarchy
 - **Display** (800, `clamp(2.5rem, 1.5rem + 3.6vw, 5rem)`, 1.02, -0.03em): hero and page-header h1s; "The rolls Lowell named" set huge. The brand-book cover and hub run larger, up to 6rem.
@@ -202,7 +202,9 @@ Under `prefers-color-scheme: dark` (unless `data-theme="light"`) and under `[dat
 
 **The Tabular Price Rule.** Prices, hours and counts use tabular figures; headings use `text-wrap: balance`.
 
-**The Headline-First Load Rule.** Only Shippori 800 (every page's h1) is preloaded, so headlines don't reflow; body faces swap in without moving the layout. Neither face has "ō"; it falls back to the system font in "ensō".
+**The Headline-First Load Rule.** Only Shippori 800 (every page's h1) is preloaded, so headlines don't reflow; body faces swap in without moving the layout.
+
+**The One Face Per Word Rule.** No word mixes typefaces. A letter the brand faces lack gets a companion glyph drawn from their own parts, never a system fallback.
 
 ## Layout
 
@@ -237,7 +239,7 @@ Flat and tonal. Depth comes from cobalt fields against glaze, not shadows. The s
 - Controls: pills (buttons, chips, status labels, category chips, the RAW mark, pitch notes).
 - The ensō: the traced vector of the restaurant's own mark (`assets/enso.svg`, generated from the master in `design/logo/`), used as a CSS mask so it can paint itself.
 
-**The Rim Rule.** A 3px line over a 1px hairline (7px total, `cobalt-ink`; `on-cobalt-secondary` inside fields), like a bowl's painted rim, is the only divider device.
+**The Rim Rule.** A 3px line over a 1px hairline (7px total, `cobalt-ink`; `on-cobalt-secondary` inside fields), like a bowl's painted rim, is the only divider device. As the top edge of a grid or table (ratings, brand-book tables, the Toast ladder, journey and voice grids) it is drawn as a border image, so no grid ever opens with a plain 3px bar.
 
 **The One Ring Rule.** One ensō per view: circling the tray in the hero, bleeding off a page header, or over a hovered plate. It is never repeated as a pattern.
 
@@ -262,13 +264,16 @@ Flat and tonal. Depth comes from cobalt fields against glaze, not shadows. The s
 Dot + bold state + detail ("Open now · Until 9 PM tonight"), computed from the hours in America/New_York. Positive dot when open, Ensō Ink when closed; without JavaScript it reads "Open Tue–Sun · Closed Mondays".
 
 ### Dish row (menu)
-Mincho name, RAW pill and chili marks (never color alone), right-aligned display-face price in Ensō Ink, gothic description, and an "Add to order" link to the Toast item that names the dish for screen readers. Optional 112px photo (84px on the narrowest phones). Sold out: struck price + orange "Sold out today".
+Mincho name, RAW pill and chili marks (never color alone), right-aligned display-face price in Ensō Ink, gothic description, and an "Add to order" link to the Toast item that names the dish for screen readers. Optional 112px photo (84px on the narrowest phones). Sold out: struck price + orange "Sold out today" from the live feed; the prototype's menu is a snapshot, so it dates the flag instead ("Sold out Oct 8").
 
 ### Plate card (home)
 5:4 photo (5:2 when wide) that scales 3.5% over 1.2s on hover; the ensō fades and turns in over the corner on hover or focus; name + price row, description, order link.
 
 ### Photography
 Every photo is a `<picture>` with AVIF and WebP sources and the JPEG as fallback; the builders give each image a `sizes` hint for its layout slot, and `tools/build_assets.py` makes the 240–1600px files. Above-the-fold photos load eagerly (the hero with high fetch priority); everything else is lazy. Failed images fall back to the brand ground.
+
+### Icons and share cards
+The favicon is the traced ensō in Ensō Orange on transparent (32px); the home-screen icons put it on Cobalt (180 and 192px). Shared links unfurl with 1200×630 cards rendered from each surface's first viewport, without the concept bar, pitch notes or anything time-dependent (the status reads "Open Tue–Sun").
 
 ### Pitch note
 Dashed orange pill marking facts that need owner confirmation, toggled from the footer. Prototype-only; remove in production.

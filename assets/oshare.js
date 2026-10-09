@@ -91,6 +91,8 @@
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) setCur(en.target.id); });
+        /* back above the first section: the first chip is current again, not the last one seen */
+        if (sections[0] && sections[0].getBoundingClientRect().top > window.innerHeight * .35) setCur(sections[0].id);
       }, { rootMargin: "-35% 0px -60% 0px" });
       sections.forEach(function (s) { if (s) io.observe(s); });
     }

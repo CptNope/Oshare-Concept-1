@@ -96,6 +96,28 @@ def responsive(s):
 def perf(s):
     return responsive(self_host_fonts(s))
 
+# ---- sharing: absolute preview URLs for GitHub Pages, favicons
+PAGES = os.environ.get("PAGES_URL", "https://cptnope.github.io/Oshare-Concept-1/")
+SHARE = {"hub": ("img/share/share-hub.jpg", "Oshare Concept 1: Blue & White, with the orange ensō around the Oshare lockup"),
+         "site": ("img/share/share-site.jpg", "Oshare website prototype: Dressed-up sushi on Market Street, with the ensō circling a tray of nigiri"),
+         "book": ("img/share/share-brand-book.jpg", "Oshare Brand Book cover in cobalt with the orange ensō")}
+
+def share_meta(s, prefix, path, kind, title=None, desc=None):
+    """og:url and an absolute og:image so links pasted into Slack, iMessage or email unfurl with a real preview."""
+    s = re.sub(r'<meta (?:property="og:(?:image|url)[^"]*"|name="twitter:[^"]*")[^>]*>\n?', "", s)
+    img, alt = SHARE[kind]
+    tags = []
+    if title and 'property="og:title"' not in s: tags.append(f'<meta property="og:title" content="{e(title)}">')
+    if desc and 'property="og:description"' not in s: tags.append(f'<meta property="og:description" content="{e(desc)}">')
+    if desc and 'name="description"' not in s: tags.insert(0, f'<meta name="description" content="{e(desc)}">')
+    tags += [f'<meta property="og:url" content="{PAGES}{path}">', f'<meta property="og:image" content="{PAGES}{img}">',
+             '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+             f'<meta property="og:image:alt" content="{e(alt)}">', '<meta name="twitter:card" content="summary_large_image">',
+             f'<link rel="icon" href="{prefix}assets/favicon-32.png" sizes="32x32" type="image/png">',
+             f'<link rel="icon" href="{prefix}assets/icon-192.png" sizes="192x192" type="image/png">',
+             f'<link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png">']
+    return s.replace("</head>", "\n".join(tags) + "\n</head>", 1)
+
 def rewrite_paths(s):
     s = re.sub(r'((?:href|src)=")(assets|img)/', r'\1../\2/', s)
     return s.replace("url(img/", "url(../img/")
@@ -123,6 +145,7 @@ for f in sorted(os.listdir(site_dir)):
     p = os.path.join(site_dir, f); s = open(p).read()
     s = rewrite_paths(s)
     s = inject_bar(s, concept_bar("../", "site"))
+    s = share_meta(s, "../", "site/" + ("" if f == "index.html" else f), "site")
     open(p, "w").write(bust(perf(private_preview(announce_new_tabs(s)))))
 
 # ---- brand book: content-only page -> full document
@@ -130,7 +153,9 @@ bp = os.path.join(ROOT, "brand-book", "index.html")
 s = rewrite_paths(open(bp).read())
 s = s.replace('href="../site/" target="_blank" rel="noopener"', 'href="../site/"')
 s = inject_bar(s, concept_bar("../", "book"))
-open(bp, "w").write(bust(perf(private_preview(announce_new_tabs(shell(s, "Oshare Brand Book", ""))))))
+s = share_meta(shell(s, "Oshare Brand Book", ""), "../", "brand-book/", "book", "Oshare Brand Book · Blue & White",
+               "Brand book for Oshare Sushi + Bar, Lowell MA: research, strategy, the Blue & White identity, applications and the build plan. A spec concept by Jeremy Anderson.")
+open(bp, "w").write(bust(perf(private_preview(announce_new_tabs(s)))))
 
 # ---- hub
 FILES = [
@@ -155,7 +180,6 @@ hub = f"""<!doctype html>
 <meta name="description" content="Brand book and website prototype for Oshare Sushi + Bar, Lowell MA. A spec concept by Jeremy Anderson.">
 <meta property="og:title" content="Oshare Concept 1 · Blue & White">
 <meta property="og:description" content="Brand book and website prototype for Oshare Sushi + Bar, Lowell MA.">
-<meta property="og:image" content="img/preview-site.jpg">
 <meta name="theme-color" content="#1F3F80">
 <link rel="stylesheet" href="assets/oshare.css">
 <link rel="stylesheet" href="assets/hub.css">
@@ -205,5 +229,5 @@ hub = f"""<!doctype html>
 </body>
 </html>
 """
-open(os.path.join(ROOT, "index.html"), "w").write(bust(perf(private_preview(hub))))
+open(os.path.join(ROOT, "index.html"), "w").write(bust(perf(private_preview(share_meta(hub, "", "", "hub")))))
 print("built: index.html, brand-book/index.html, site/*.html")

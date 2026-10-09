@@ -1,6 +1,6 @@
 {
  "schemaVersion": 2,
- "generatedAt": "2026-10-08T22:34:46+00:00",
+ "generatedAt": "2026-10-09T16:06:48+00:00",
  "title": "Design System: Oshare Sushi + Bar",
  "extensions": {
   "colorMeta": {
@@ -544,12 +544,17 @@
     "value": "max-height 30em"
    }
   ],
+  "icons": {
+   "favicon": "assets/favicon-32.png (ensō, orange, transparent)",
+   "touch": "assets/apple-touch-icon.png 180, assets/icon-192.png (ensō on cobalt)",
+   "share": "img/share/share-{hub,site,brand-book}.jpg 1200x630"
+  },
   "fonts": {
    "hosting": "self-hosted woff2 in assets/fonts (SIL OFL 1.1)",
    "preload": [
     "shippori-mincho-b1-latin-800-normal.woff2"
    ],
-   "knownGap": "Neither face has ō; it falls back in 'ensō'."
+   "macron": "ō / Ō come from Oshare Macron Mincho / Gothic (tools/build_macron_fonts.py), first in each stack, unicode-range U+014C-014D"
   },
   "images": {
    "pipeline": "tools/build_assets.py: img/*.jpg -> img/w/<name>-<w>.avif|webp at 240-1600px",
@@ -664,7 +669,12 @@
    },
    {
     "name": "The Headline-First Load Rule",
-    "body": "Only Shippori 800 (every page's h1) is preloaded, so headlines don't reflow; body faces swap in without moving the layout. Neither face has \"ō\"; it falls back to the system font in \"ensō\".",
+    "body": "Only Shippori 800 (every page's h1) is preloaded, so headlines don't reflow; body faces swap in without moving the layout.",
+    "section": "typography"
+   },
+   {
+    "name": "The One Face Per Word Rule",
+    "body": "No word mixes typefaces. A letter the brand faces lack gets a companion glyph drawn from their own parts, never a system fallback.",
     "section": "typography"
    },
    {
@@ -674,7 +684,7 @@
    },
    {
     "name": "The Rim Rule",
-    "body": "A 3px line over a 1px hairline (7px total, `cobalt-ink`; `on-cobalt-secondary` inside fields), like a bowl's painted rim, is the only divider device.",
+    "body": "A 3px line over a 1px hairline (7px total, `cobalt-ink`; `on-cobalt-secondary` inside fields), like a bowl's painted rim, is the only divider device. As the top edge of a grid or table (ratings, brand-book tables, the Toast ladder, journey and voice grids) it is drawn as a border image, so no grid ever opens with a plain 3px bar.",
     "section": "shapes"
    },
    {
